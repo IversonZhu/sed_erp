@@ -9,4 +9,6 @@ public interface ValueCardService {
     int addOne(ValueCardForm valueCardForm);
 
     PageInfo<ValueCard> getList(int pageNum, int pageSize);
+
+    ValueCard getCardByNo(String cardNo);
 }

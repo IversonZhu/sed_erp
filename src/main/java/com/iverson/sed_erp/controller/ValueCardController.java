@@ -43,6 +43,13 @@ public class ValueCardController {
         }
     }
 
+    @GetMapping("/get")
+    @ResponseBody
+    public ResultVo get(@RequestParam(name = "cardNo", required = true) String cardNo){
+        ValueCard valueCard = valueCardService.getCardByNo(cardNo);
+        return ResultVoUtil.success(valueCard);
+    }
+
     @GetMapping("/list")
     @ResponseBody
     public ResultVo list(@RequestParam(name = "pageNum", required = true) int pageNum, @RequestParam(name = "pageSize",defaultValue = "10") int pageSize){

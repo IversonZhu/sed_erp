@@ -40,4 +40,10 @@ public class ValueCardServiceImpl implements ValueCardService {
         PageInfo<ValueCard> valueCardPageInfo = new PageInfo<>(valueCards);
         return valueCardPageInfo;
     }
+
+    @Override
+    public ValueCard getCardByNo(String cardNo) {
+        ValueCard valueCard = valueCardMapper.searchValueCardByCardNo(cardNo);
+        return valueCard;
+    }
 }
