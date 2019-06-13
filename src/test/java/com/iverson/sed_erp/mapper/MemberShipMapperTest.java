@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,7 +35,16 @@ public class MemberShipMapperTest {
 
     @Test
     public void searchMemberShipCardByCardNo() {
-        MemberShipCard memberShipCard = memberShipMapper.searchMemberShipCardByCardNo("mscn20190611135010687904");
-        Assert.assertNotNull(memberShipCard);
+        List<MemberShipCard> memberShipCards = memberShipMapper.searchMemberShipCards(null,null,null,null);
+        System.out.println(memberShipCards);
+    }
+
+    public void updateByCardNo(){
+        MemberShipCard memberShipCard = new MemberShipCard();
+        memberShipCard.setCardNo("");
+        memberShipCard.setHolder("");
+        memberShipCard.setPhoneNumber("");
+        //memberShipCard.setDiscount();
+        //memberShipCard.setType();
     }
 }

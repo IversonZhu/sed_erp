@@ -9,7 +9,7 @@ public class ValueCard {
     private int id;
     private String cardNo;
     private String holder;
-    private double balance;
+    private Double balance;
     private String phoneNumber;
     private Date createTime;
     private Date modifyTime;

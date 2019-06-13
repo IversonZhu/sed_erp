@@ -45,15 +45,31 @@ public class ValueCardController {
 
     @GetMapping("/get")
     @ResponseBody
-    public ResultVo get(@RequestParam(name = "cardNo", required = true) String cardNo){
-        ValueCard valueCard = valueCardService.getCardByNo(cardNo);
-        return ResultVoUtil.success(valueCard);
+    public ResultVo get(@RequestParam(name = "cardNo", required = false) String cardNo,
+                        @RequestParam(name = "holder", required = false) String holder,
+                        @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
+                        @RequestParam(name = "pageNum") int pageNum,
+                        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        PageInfo<ValueCard> valueCardPageInfo = valueCardService.getCards(cardNo, holder, phoneNumber,pageNum, pageSize);
+        return ResultVoUtil.success(valueCardPageInfo);
     }
 
     @GetMapping("/list")
     @ResponseBody
-    public ResultVo list(@RequestParam(name = "pageNum", required = true) int pageNum, @RequestParam(name = "pageSize",defaultValue = "10") int pageSize){
+    public ResultVo list(@RequestParam(name = "pageNum") int pageNum, @RequestParam(name = "pageSize",defaultValue = "10") int pageSize){
         PageInfo<ValueCard> valueCardPageInfo = valueCardService.getList(pageNum, pageSize);
         return ResultVoUtil.success(valueCardPageInfo);
+    }
+
+    @PostMapping("update")
+    @ResponseBody
+    public ResultVo update(@RequestBody ValueCardForm valueCardForm, BindingResult bindingResult){
+        int result = valueCardService.updateValueCardByCardNo(valueCardForm);
+        if(result == 1){
+            return ResultVoUtil.success();
+        }else{
+            log.error("【创建储值卡】更新不成功，result = {}", result);
+            return ResultVoUtil.error(ResultEnum.UPDATE_ERROR.getCode(),ResultEnum.UPDATE_ERROR.getMessage());
+        }
     }
 }

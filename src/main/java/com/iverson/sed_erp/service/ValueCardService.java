@@ -10,5 +10,7 @@ public interface ValueCardService {
 
     PageInfo<ValueCard> getList(int pageNum, int pageSize);
 
-    ValueCard getCardByNo(String cardNo);
+    PageInfo<ValueCard> getCards(String cardNo, String holder, String phoneNumber, int pageNum, int pageSize);
+
+    int updateValueCardByCardNo(ValueCardForm valueCardForm);
 }

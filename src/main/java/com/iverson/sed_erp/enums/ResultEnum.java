@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum  ResultEnum {
     PARAM_ERROR(0,"参数不正确"),
-    INSERT_ERROR(400,"插入失败");
+    INSERT_ERROR(400,"插入失败"),
+    UPDATE_ERROR(401,"更新失败");
 
     private Integer code;
     private String message;

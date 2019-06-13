@@ -1,17 +1,25 @@
 package com.iverson.sed_erp.mapper;
 
 import com.iverson.sed_erp.pojo.MemberShipCard;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.iverson.sed_erp.provider.SqlProvider;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @Mapper
 public interface MemberShipMapper {
     @Insert("insert into sed_market_membership_card values (#{id},#{cardNo},#{holder},#{phoneNumber},#{type},#{discount},#{createTime},#{modifyTime})")
-    void addOne(MemberShipCard memberShipCard);
+    int addOne(MemberShipCard memberShipCard);
 
-    @Select("select * from sed_market_membership_card where card_no = #{cardNo}")
-    MemberShipCard searchMemberShipCardByCardNo(String cardNo);
+    @UpdateProvider(type = SqlProvider.class, method = "updateMemberShipCardByNo")
+    int updateByCardNo(MemberShipCard memberShipCard);
+
+    @SelectProvider(type = SqlProvider.class, method = "searchMemberShipCards")
+    List<MemberShipCard> searchMemberShipCards(@Param("cardNo") String cardNo,
+                                               @Param("holder") String holder,
+                                               @Param("phoneNumber") String phoneNumber,
+                                               @Param("type") Integer type);
+
 }

@@ -10,8 +10,8 @@ public class MemberShipCard {
     private String cardNo;
     private String holder;
     private String phoneNumber;
-    private int type;
-    private int discount;
+    private Integer type;
+    private Integer discount;
     private Date createTime;
     private Date modifyTime;
 }

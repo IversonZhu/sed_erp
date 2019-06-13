@@ -42,8 +42,25 @@ public class ValueCardServiceImpl implements ValueCardService {
     }
 
     @Override
-    public ValueCard getCardByNo(String cardNo) {
-        ValueCard valueCard = valueCardMapper.searchValueCardByCardNo(cardNo);
-        return valueCard;
+    public PageInfo<ValueCard> getCards(String cardNo, String holder, String phoneNumber, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<ValueCard> valueCards = valueCardMapper.searchValueCards(cardNo, holder, phoneNumber);
+        PageInfo<ValueCard> valueCardPageInfo = new PageInfo<>(valueCards);
+        return valueCardPageInfo;
+    }
+
+    @Override
+    @Transactional
+    public int updateValueCardByCardNo(ValueCardForm valueCardForm) {
+        ValueCard valueCard = new ValueCard();
+        if(valueCardForm.getCardNo() == null){
+            return 0;//错误
+        }
+        valueCard.setCardNo(valueCardForm.getCardNo());
+        valueCard.setHolder(valueCardForm.getHolder());
+        valueCard.setPhoneNumber(valueCardForm.getPhoneNumber());
+        valueCard.setBalance(valueCardForm.getBalance());
+        valueCard.setModifyTime(new Date());
+        return valueCardMapper.updateByCardNo(valueCard);
     }
 }

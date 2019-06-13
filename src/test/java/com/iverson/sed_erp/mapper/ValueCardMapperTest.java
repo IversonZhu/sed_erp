@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +35,19 @@ public class ValueCardMapperTest {
 
     @Test
     public void searchMemberShipCardByCardNo() {
-        ValueCard valueCard = valueCardMapper.searchValueCardByCardNo("vcn20190611140042788866");
+        List<ValueCard> valueCard = valueCardMapper.searchValueCards("vcn20190612163704196125","Iverson",null);
         Assert.assertNotNull(valueCard);
+    }
+
+    @Test
+    public void updateByCardNo(){
+        ValueCard valueCard = new ValueCard();
+        valueCard.setCardNo("vcn20190612163704196125");
+        valueCard.setHolder("Iverson");
+        valueCard.setBalance(99.51);
+        valueCard.setPhoneNumber("13822528774");
+        valueCard.setModifyTime(new Date());
+        int result = valueCardMapper.updateByCardNo(valueCard);
+        System.out.println("执行成功: " + result);
     }
 }

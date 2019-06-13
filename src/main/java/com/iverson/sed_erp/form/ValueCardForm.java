@@ -6,6 +6,11 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 public class ValueCardForm {
+
+    /**
+     * 卡号
+     */
+    private String cardNo;
     /**
      * 持有者
      */
@@ -14,7 +19,7 @@ public class ValueCardForm {
     /**
      * 余额
      */
-    private double balance;
+    private Double balance;
     /**
      * 手机号码
      */
