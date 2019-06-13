@@ -6,6 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 public class SqlProvider {
 
+    /**
+     * 更新储值卡信息
+     * @param valueCard
+     * @return
+     */
     public String updateValueCardByNo(ValueCard valueCard){
         StringBuffer sql = new StringBuffer("update sed_market_value_card set modify_time=#{modifyTime}");
         if(valueCard.getHolder() != null){
@@ -17,10 +22,17 @@ public class SqlProvider {
         if(valueCard.getPhoneNumber() != null){
             sql.append(", phone_number=#{phoneNumber}");
         }
-        sql.append("where card_no=#{cardNo}");
+        sql.append(" where card_no=#{cardNo}");
         return sql.toString();
     }
 
+    /**
+     * 条件查找储值卡信息
+     * @param cardNo
+     * @param holder
+     * @param phoneNumber
+     * @return
+     */
     public String searchValueCards(@Param("cardNo") String cardNo,
                                    @Param("holder") String holder,
                                    @Param("phoneNumber") String phoneNumber) {
@@ -37,6 +49,11 @@ public class SqlProvider {
         return sql.toString();
     }
 
+    /**
+     * 更新会员卡信息
+     * @param memberShipCard
+     * @return
+     */
     public String updateMemberShipCardByNo(MemberShipCard memberShipCard){
         StringBuffer sql = new StringBuffer("update sed_market_membership_card set modify_time=#{modifyTime}");
         if(memberShipCard.getHolder() != null){
@@ -51,10 +68,18 @@ public class SqlProvider {
         if(memberShipCard.getDiscount() != null){
             sql.append(", discount=#{discount}");
         }
-        sql.append("where card_no=#{cardNo}");
+        sql.append(" where card_no=#{cardNo}");
         return sql.toString();
     }
 
+    /**
+     * 条件查找会员卡列表
+     * @param cardNo
+     * @param holder
+     * @param phoneNumber
+     * @param type
+     * @return
+     */
     public String searchMemberShipCards(@Param("cardNo") String cardNo,
                                         @Param("holder") String holder,
                                         @Param("phoneNumber") String phoneNumber,
