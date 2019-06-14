@@ -2,7 +2,6 @@ package com.iverson.sed_erp.mapper;
 
 import com.iverson.sed_erp.pojo.Brand;
 import com.iverson.sed_erp.provider.BrandSqlProvider;
-import com.iverson.sed_erp.provider.ValueCardSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 

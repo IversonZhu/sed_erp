@@ -2,7 +2,6 @@ package com.iverson.sed_erp.mapper;
 
 import com.iverson.sed_erp.pojo.MemberShipCard;
 import com.iverson.sed_erp.provider.MemberShipCardSqlProvider;
-import com.iverson.sed_erp.provider.ValueCardSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
