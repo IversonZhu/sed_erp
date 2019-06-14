@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,7 +32,7 @@ public class BrandMapperTest {
 
     @Test
     public void getBrandByBrandNo() {
-        Brand brand = brandMapper.getBrandByBrandNo("bn20190611112212788710");
-        Assert.assertNotNull(brand);
+        List<Brand> brands = brandMapper.getBrands("bn20190611112212788710",null);
+        Assert.assertNotNull(brands);
     }
 }

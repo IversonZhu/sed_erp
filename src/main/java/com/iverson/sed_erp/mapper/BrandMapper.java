@@ -1,6 +1,8 @@
 package com.iverson.sed_erp.mapper;
 
 import com.iverson.sed_erp.pojo.Brand;
+import com.iverson.sed_erp.provider.BrandSqlProvider;
+import com.iverson.sed_erp.provider.ValueCardSqlProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +13,12 @@ import java.util.List;
 public interface BrandMapper {
 
     @Insert("insert into sed_market_brand values(#{id},#{brandNo},#{name},#{createTime},#{modifyTime})")
-    void addBrand(Brand brand);
+    int addBrand(Brand brand);
 
-    @Select("select * from sed_market_brand where brand_no = #{brandNo}")
-    Brand getBrandByBrandNo(String brandNo);
+    @SelectProvider(type = BrandSqlProvider.class, method = "getBrands")
+    List<Brand> getBrands(@Param("brandNo") String brandNo,
+                    @Param("name") String name);
 
-    @Select("select * from sed_market_brand")
-    List<Brand> getList();
+    @UpdateProvider(type = BrandSqlProvider.class, method = "updateBrandByBrandNo")
+    int updateBrandByBrandNo(Brand brand);
 }

@@ -5,7 +5,9 @@ import com.iverson.sed_erp.form.BrandForm;
 import com.iverson.sed_erp.pojo.Brand;
 
 public interface BrandService {
-    void addBrand(BrandForm brandForm);
+    int addBrand(BrandForm brandForm);
 
-    PageInfo<Brand> getList(int pageNum, int pageSize);
+    PageInfo<Brand> getBrands(String brandNo, String name, int pageNum, int pageSize);
+
+    int updateBrandByBrandNo(BrandForm brandForm);
 }

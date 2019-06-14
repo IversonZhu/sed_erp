@@ -9,6 +9,7 @@ import com.iverson.sed_erp.service.MemberShipCardService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ public class MemberShipCardServiceImpl implements MemberShipCardService {
     private MemberShipMapper memberShipMapper;
 
     @Override
+    @Transactional
     public int addOne(MemberShipCardForm memberShipCardForm) {
         MemberShipCard memberShipCard = new MemberShipCard();
         memberShipCard.setCardNo(NoGenerateUtil.getMemberShipCardNo());
@@ -41,12 +43,13 @@ public class MemberShipCardServiceImpl implements MemberShipCardService {
     }
 
     @Override
+    @Transactional
     public int updateMemberShipCardByCardNo(MemberShipCardForm memberShipCardForm) {
         if(memberShipCardForm.getCardNo() == null){
             return 0;
         }
         MemberShipCard memberShipCard = new MemberShipCard();
-        memberShipCard.setCardNo(NoGenerateUtil.getMemberShipCardNo());
+        memberShipCard.setCardNo(memberShipCardForm.getCardNo());
         memberShipCard.setHolder(memberShipCardForm.getHolder());
         memberShipCard.setPhoneNumber(memberShipCardForm.getPhoneNumber());
         memberShipCard.setType(memberShipCardForm.getType());

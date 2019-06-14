@@ -39,12 +39,16 @@ public class MemberShipMapperTest {
         System.out.println(memberShipCards);
     }
 
+    @Test
     public void updateByCardNo(){
         MemberShipCard memberShipCard = new MemberShipCard();
-        memberShipCard.setCardNo("");
-        memberShipCard.setHolder("");
-        memberShipCard.setPhoneNumber("");
+        memberShipCard.setCardNo("mscn20190611135010687904");
+        memberShipCard.setHolder("小明");
+        memberShipCard.setModifyTime(new Date());
+        //memberShipCard.setPhoneNumber("");
         //memberShipCard.setDiscount();
         //memberShipCard.setType();
+        int result = memberShipMapper.updateByCardNo(memberShipCard);
+        System.out.println("结果: " + result);
     }
 }

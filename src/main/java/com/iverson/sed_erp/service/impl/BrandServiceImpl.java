@@ -9,6 +9,7 @@ import com.iverson.sed_erp.service.BrandService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -20,20 +21,31 @@ public class BrandServiceImpl implements BrandService {
     private BrandMapper brandMapper;
 
     @Override
-    public void addBrand(BrandForm brandForm) {
+    @Transactional
+    public int addBrand(BrandForm brandForm) {
         Brand brand = new Brand();
         brand.setBrandNo(NoGenerateUtil.getBrandNo());
         brand.setName(brandForm.getName());
         brand.setCreateTime(new Date());
         brand.setModifyTime(new Date());
-        brandMapper.addBrand(brand);
+        return brandMapper.addBrand(brand);
     }
 
     @Override
-    public PageInfo<Brand> getList(int pageNum, int pageSize) {
+    public PageInfo<Brand> getBrands(String brandNo,String name, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Brand> brands = brandMapper.getList();
+        List<Brand> brands = brandMapper.getBrands(brandNo,name);
         PageInfo<Brand> brandPageInfo = new PageInfo<>(brands);
         return brandPageInfo;
+    }
+
+    @Override
+    @Transactional
+    public int updateBrandByBrandNo(BrandForm brandForm) {
+        Brand brand = new Brand();
+        brand.setBrandNo(brandForm.getBrandNo());
+        brand.setName(brandForm.getName());
+        brand.setModifyTime(new Date());
+        return brandMapper.updateBrandByBrandNo(brand);
     }
 }

@@ -8,6 +8,11 @@ import javax.validation.constraints.NotBlank;
 public class BrandForm {
 
     /**
+     * 品牌编号
+     */
+    private String brandNo;
+
+    /**
      * 品牌名称
      */
     @NotBlank(message = "品牌名称必填")
