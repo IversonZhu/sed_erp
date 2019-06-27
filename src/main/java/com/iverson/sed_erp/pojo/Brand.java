@@ -9,6 +9,7 @@ public class Brand {
     private int id;
     private String brandNo;
     private String name;
+    private int status;
     private Date createTime;
     private Date modifyTime;
 }

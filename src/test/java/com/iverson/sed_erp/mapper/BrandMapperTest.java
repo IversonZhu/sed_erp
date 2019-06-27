@@ -1,5 +1,6 @@
 package com.iverson.sed_erp.mapper;
 
+import com.iverson.sed_erp.enums.BrandStatusEnum;
 import com.iverson.sed_erp.pojo.Brand;
 import com.iverson.sed_erp.util.NoGenerateUtil;
 import org.junit.Assert;
@@ -23,7 +24,8 @@ public class BrandMapperTest {
     public void addBrand() {
         Brand brand = new Brand();
         brand.setBrandNo(NoGenerateUtil.getBrandNo());
-        brand.setName("李宁");
+        brand.setName("怡宝");
+        brand.setStatus(BrandStatusEnum.NORMAL.getCode());
         brand.setCreateTime(new Date());
         brand.setModifyTime(new Date());
         brandMapper.addBrand(brand);
