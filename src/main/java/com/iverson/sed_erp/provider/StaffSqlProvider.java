@@ -30,4 +30,9 @@ public class StaffSqlProvider {
         sql.append(" where staff_no=#{staffNo}");
         return sql.toString();
     }
+
+    public String getListSql(){//这个要做一个VO
+        StringBuffer sql = new StringBuffer("select * from ");
+        return sql.toString();
+    }
 }
