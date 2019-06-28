@@ -28,23 +28,13 @@ public class ValueCardServiceImpl implements ValueCardService {
         valueCard.setHolder(valueCardForm.getHolder());
         valueCard.setBalance(valueCardForm.getBalance());
         valueCard.setPhoneNumber(valueCardForm.getPhoneNumber());
-        valueCard.setCreateTime(new Date());
-        valueCard.setModifyTime(new Date());
         return valueCardMapper.addOne(valueCard);
-    }
-
-    @Override
-    public PageInfo<ValueCard> getList(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<ValueCard> valueCards = valueCardMapper.getList();
-        PageInfo<ValueCard> valueCardPageInfo = new PageInfo<>(valueCards);
-        return valueCardPageInfo;
     }
 
     @Override
     public PageInfo<ValueCard> getCards(String cardNo, String holder, String phoneNumber, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<ValueCard> valueCards = valueCardMapper.searchValueCards(cardNo, holder, phoneNumber);
+        List<ValueCard> valueCards = valueCardMapper.getList(cardNo, holder, phoneNumber);
         PageInfo<ValueCard> valueCardPageInfo = new PageInfo<>(valueCards);
         return valueCardPageInfo;
     }
@@ -60,7 +50,6 @@ public class ValueCardServiceImpl implements ValueCardService {
         valueCard.setHolder(valueCardForm.getHolder());
         valueCard.setPhoneNumber(valueCardForm.getPhoneNumber());
         valueCard.setBalance(valueCardForm.getBalance());
-        valueCard.setModifyTime(new Date());
-        return valueCardMapper.updateByCardNo(valueCard);
+        return valueCardMapper.update(valueCard);
     }
 }

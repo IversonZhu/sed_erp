@@ -14,17 +14,13 @@ public class Staff {
     /** 手机号码 */
     private String phoneNumber;
     /** 年纪 */
-    private int age;
+    private Integer age;
     /** 性别 */
-    private int sex;
+    private Integer sex;
     /** 生日 */
     private Date birth;
     /** 地址 */
     private String address;
     /** 部门号 */
     private String departmentNo;
-    /** 部门 */
-    private String departmentName;
-    private Date createTime;
-    private Date modifyTime;
 }

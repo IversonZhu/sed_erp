@@ -1,10 +1,8 @@
 package com.iverson.sed_erp.mapper;
 
 import com.iverson.sed_erp.pojo.Department;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.iverson.sed_erp.provider.DepartmentSqlProvider;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,12 +11,16 @@ import java.util.List;
 @Mapper
 public interface DepartmentMapper {
 
-    @Insert("insert into (department_no,name,status) values (#{departmentNo},#{name},#{status}")
-    int addOne(Department department);
+    @Insert("insert into sed_market_department (department_no,name,status) values (#{departmentNo},#{name},#{status})")
+    int addOne(@Param("departmentNo") String departmentNo,
+               @Param("name") String name,
+               @Param("status") int status);
 
-    @Update("")
-    int update();
+    @UpdateProvider(type = DepartmentSqlProvider.class, method = "getUpdateSql")
+    int update(Department department);
 
-    @Select("")
-    List<Department> getList();
+    @SelectProvider(type = DepartmentSqlProvider.class, method = "getListSql")
+    List<Department> getList(@Param("departmentNo") String departmentNo,
+                             @Param("name") String name,
+                             @Param("status") int status);
 }

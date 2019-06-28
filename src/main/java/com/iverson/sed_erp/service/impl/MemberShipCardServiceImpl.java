@@ -29,15 +29,13 @@ public class MemberShipCardServiceImpl implements MemberShipCardService {
         memberShipCard.setPhoneNumber(memberShipCardForm.getPhoneNumber());
         memberShipCard.setType(memberShipCardForm.getType());
         memberShipCard.setDiscount(memberShipCardForm.getDiscount());
-        memberShipCard.setCreateTime(new Date());
-        memberShipCard.setModifyTime(new Date());
         return memberShipMapper.addOne(memberShipCard);
     }
 
     @Override
     public PageInfo<MemberShipCard> getMemberShipCards(String cardNo, String holder, String phoneNumber, Integer  type, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<MemberShipCard> memberShipCards = memberShipMapper.searchMemberShipCards(cardNo, holder, phoneNumber, type);
+        List<MemberShipCard> memberShipCards = memberShipMapper.getList(cardNo, holder, phoneNumber, type);
         PageInfo<MemberShipCard> memberShipCardPageInfo = new PageInfo<>(memberShipCards);
         return memberShipCardPageInfo;
     }
@@ -54,7 +52,6 @@ public class MemberShipCardServiceImpl implements MemberShipCardService {
         memberShipCard.setPhoneNumber(memberShipCardForm.getPhoneNumber());
         memberShipCard.setType(memberShipCardForm.getType());
         memberShipCard.setDiscount(memberShipCardForm.getDiscount());
-        memberShipCard.setModifyTime(new Date());
-        return memberShipMapper.updateByCardNo(memberShipCard);
+        return memberShipMapper.update(memberShipCard);
     }
 }

@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 public class GoodsSqlProvider {
 
-    public String updateGoodsByGoodsNo(Goods goods){
+    public String getUpdateSql(Goods goods){
 
         StringBuffer sql = new StringBuffer("update sed_market_goods set modify_time=#{modifyTime}");
         if(goods.getName() != null){
@@ -33,7 +33,7 @@ public class GoodsSqlProvider {
         return sql.toString();
     }
 
-    public String getGoodsList(@Param("goodsNo") String goodsNo,
+    public String getListSql(@Param("goodsNo") String goodsNo,
                                @Param("name") String name,
                                @Param("barcode") String barcode,
                                @Param("weight") String weight,

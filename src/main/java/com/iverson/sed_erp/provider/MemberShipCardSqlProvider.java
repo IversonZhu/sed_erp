@@ -10,7 +10,7 @@ public class MemberShipCardSqlProvider {
      * @param memberShipCard
      * @return
      */
-    public String updateMemberShipCardByNo(MemberShipCard memberShipCard){
+    public String getUpdateSql(MemberShipCard memberShipCard){
         StringBuffer sql = new StringBuffer("update sed_market_membership_card set modify_time=#{modifyTime}");
         if(memberShipCard.getHolder() != null){
             sql.append(", holder=#{holder}");
@@ -36,10 +36,10 @@ public class MemberShipCardSqlProvider {
      * @param type
      * @return
      */
-    public String searchMemberShipCards(@Param("cardNo") String cardNo,
-                                        @Param("holder") String holder,
-                                        @Param("phoneNumber") String phoneNumber,
-                                        @Param("type") Integer type) {
+    public String getListSql(@Param("cardNo") String cardNo,
+                             @Param("holder") String holder,
+                             @Param("phoneNumber") String phoneNumber,
+                             @Param("type") Integer type) {
         StringBuffer sql = new StringBuffer("select * from sed_market_membership_card where 1=1");
         if(cardNo != null){
             sql.append(" and card_no like CONCAT('%',#{cardNo},'%')");

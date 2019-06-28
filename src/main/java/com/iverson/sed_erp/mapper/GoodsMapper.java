@@ -25,8 +25,8 @@ public interface GoodsMapper {
      * @param goods
      * @return
      */
-    @UpdateProvider(type = GoodsSqlProvider.class, method = "updateGoodsByGoodsNo")
-    int updateGoodsByGoodsNo(Goods goods);
+    @UpdateProvider(type = GoodsSqlProvider.class, method = "getUpdateSql")
+    int update(Goods goods);
 
     /**
      * 查询商品库存
@@ -47,8 +47,8 @@ public interface GoodsMapper {
      * @param brandNo
      * @return
      */
-    @SelectProvider(type = GoodsSqlProvider.class, method = "getGoodsList")
-    List<GoodsVo> searchGoods(@Param("goodsNo") String goodsNo,
+    @SelectProvider(type = GoodsSqlProvider.class, method = "getListSql")
+    List<GoodsVo> getList(@Param("goodsNo") String goodsNo,
                               @Param("name") String name,
                               @Param("barcode") String barcode,
                               @Param("weight") String weight,

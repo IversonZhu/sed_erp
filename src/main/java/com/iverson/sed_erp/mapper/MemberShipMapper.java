@@ -13,13 +13,13 @@ public interface MemberShipMapper {
     @Insert("insert into sed_market_membership_card values (#{id},#{cardNo},#{holder},#{phoneNumber},#{type},#{discount},#{createTime},#{modifyTime})")
     int addOne(MemberShipCard memberShipCard);
 
-    @UpdateProvider(type = MemberShipCardSqlProvider.class, method = "updateMemberShipCardByNo")
-    int updateByCardNo(MemberShipCard memberShipCard);
+    @UpdateProvider(type = MemberShipCardSqlProvider.class, method = "getUpdateSql")
+    int update(MemberShipCard memberShipCard);
 
-    @SelectProvider(type = MemberShipCardSqlProvider.class, method = "searchMemberShipCards")
-    List<MemberShipCard> searchMemberShipCards(@Param("cardNo") String cardNo,
-                                               @Param("holder") String holder,
-                                               @Param("phoneNumber") String phoneNumber,
-                                               @Param("type") Integer type);
+    @SelectProvider(type = MemberShipCardSqlProvider.class, method = "getListSql")
+    List<MemberShipCard> getList(@Param("cardNo") String cardNo,
+                                 @Param("holder") String holder,
+                                 @Param("phoneNumber") String phoneNumber,
+                                 @Param("type") Integer type);
 
 }

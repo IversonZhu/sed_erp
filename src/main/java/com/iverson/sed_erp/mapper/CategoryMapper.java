@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper
 public interface CategoryMapper {
 
-    @InsertProvider(type = CategorySqlProvider.class, method = "insertOne")
+    @InsertProvider(type = CategorySqlProvider.class, method = "getInsertSql")
     int addOne(@Param("categoryNo") String categoryNo,
                @Param("name") String name,
                @Param("parentNo") String parentNo,

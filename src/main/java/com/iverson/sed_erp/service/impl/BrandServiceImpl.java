@@ -26,15 +26,13 @@ public class BrandServiceImpl implements BrandService {
         Brand brand = new Brand();
         brand.setBrandNo(NoGenerateUtil.getBrandNo());
         brand.setName(brandForm.getName());
-        brand.setCreateTime(new Date());
-        brand.setModifyTime(new Date());
-        return brandMapper.addBrand(brand);
+        return brandMapper.addOne(brand);
     }
 
     @Override
     public PageInfo<Brand> getBrands(String brandNo,String name, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Brand> brands = brandMapper.getBrands(brandNo,name);
+        List<Brand> brands = brandMapper.getList(brandNo,name);
         PageInfo<Brand> brandPageInfo = new PageInfo<>(brands);
         return brandPageInfo;
     }
@@ -45,7 +43,6 @@ public class BrandServiceImpl implements BrandService {
         Brand brand = new Brand();
         brand.setBrandNo(brandForm.getBrandNo());
         brand.setName(brandForm.getName());
-        brand.setModifyTime(new Date());
-        return brandMapper.updateBrandByBrandNo(brand);
+        return brandMapper.update(brand);
     }
 }

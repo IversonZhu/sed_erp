@@ -10,7 +10,7 @@ public class ValueCardSqlProvider {
      * @param valueCard
      * @return
      */
-    public String updateValueCardByNo(ValueCard valueCard){
+    public String getUpdateSql(ValueCard valueCard){
         StringBuffer sql = new StringBuffer("update sed_market_value_card set modify_time=#{modifyTime}");
         if(valueCard.getHolder() != null){
             sql.append(", holder=#{holder}");
@@ -32,7 +32,7 @@ public class ValueCardSqlProvider {
      * @param phoneNumber
      * @return
      */
-    public String searchValueCards(@Param("cardNo") String cardNo,
+    public String getListSql(@Param("cardNo") String cardNo,
                                    @Param("holder") String holder,
                                    @Param("phoneNumber") String phoneNumber) {
         StringBuffer sql = new StringBuffer("select * from sed_market_value_card where 1=1");

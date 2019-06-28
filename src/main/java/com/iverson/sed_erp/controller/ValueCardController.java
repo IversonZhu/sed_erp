@@ -54,13 +54,6 @@ public class ValueCardController {
         return ResultVoUtil.success(valueCardPageInfo);
     }
 
-    @GetMapping("/list")
-    @ResponseBody
-    public ResultVo list(@RequestParam(name = "pageNum") int pageNum, @RequestParam(name = "pageSize",defaultValue = "10") int pageSize){
-        PageInfo<ValueCard> valueCardPageInfo = valueCardService.getList(pageNum, pageSize);
-        return ResultVoUtil.success(valueCardPageInfo);
-    }
-
     @PostMapping("update")
     @ResponseBody
     public ResultVo update(@RequestBody ValueCardForm valueCardForm, BindingResult bindingResult){

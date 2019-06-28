@@ -12,12 +12,12 @@ import java.util.List;
 public interface BrandMapper {
 
     @Insert("insert into sed_market_brand values(#{id},#{brandNo},#{name},#{status},#{createTime},#{modifyTime})")
-    int addBrand(Brand brand);
+    int addOne(Brand brand);
 
-    @SelectProvider(type = BrandSqlProvider.class, method = "getBrands")
-    List<Brand> getBrands(@Param("brandNo") String brandNo,
-                    @Param("name") String name);
+    @SelectProvider(type = BrandSqlProvider.class, method = "getListSql")
+    List<Brand> getList(@Param("brandNo") String brandNo,
+                          @Param("name") String name);
 
-    @UpdateProvider(type = BrandSqlProvider.class, method = "updateBrandByBrandNo")
-    int updateBrandByBrandNo(Brand brand);
+    @UpdateProvider(type = BrandSqlProvider.class, method = "getUpdateSql")
+    int update(Brand brand);
 }
