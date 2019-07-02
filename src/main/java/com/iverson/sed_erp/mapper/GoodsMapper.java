@@ -17,7 +17,7 @@ public interface GoodsMapper {
      * @param goods
      * @return
      */
-    @Insert("insert into sed_market_goods values (#{id},#{goodsNo},#{name},#{barcode},#{weight},#{price},#{categoryNo},#{brandNo},#{store},#{createTime},#{modifyTime})")
+    @Insert("insert into sed_market_goods(goods_no,name,barcode,weight,price,category_no,brand_no,store) values (#{goodsNo},#{name},#{barcode},#{weight},#{price},#{categoryNo},#{brandNo},#{store})")
     int addOne(Goods goods);
 
     /**
@@ -41,8 +41,6 @@ public interface GoodsMapper {
      * @param goodsNo
      * @param name
      * @param barcode
-     * @param weight
-     * @param price
      * @param categoryNo
      * @param brandNo
      * @return
@@ -51,8 +49,6 @@ public interface GoodsMapper {
     List<GoodsVo> getList(@Param("goodsNo") String goodsNo,
                               @Param("name") String name,
                               @Param("barcode") String barcode,
-                              @Param("weight") String weight,
-                              @Param("price") String price,
                               @Param("categoryNo") String categoryNo,
                               @Param("brandNo") String brandNo);
 

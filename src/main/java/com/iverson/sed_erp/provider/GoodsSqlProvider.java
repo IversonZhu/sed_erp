@@ -7,28 +7,23 @@ public class GoodsSqlProvider {
 
     public String getUpdateSql(Goods goods){
 
-        StringBuffer sql = new StringBuffer("update sed_market_goods set modify_time=#{modifyTime}");
+        StringBuffer sql = new StringBuffer("update sed_market_goods set ");
         if(goods.getName() != null){
-            sql.append(", name=#{name}");
+            sql.append("name=#{name},");
         }
         if(goods.getBarcode() != null){
-            sql.append(", barcode=#{barcode}");
-        }
-        if(goods.getWeight() != null){
-            sql.append(", weight=#{weight}");
-        }
-        if(goods.getPrice() != null){
-            sql.append(", price=#{price}");
+            sql.append("barcode=#{barcode},");
         }
         if(goods.getCategoryNo() != null){
-            sql.append(", category_no=#{categoryNo}");
+            sql.append("category_no=#{categoryNo},");
         }
         if(goods.getBrandNo() != null){
-            sql.append(", brand_no=#{categoryNo}");
+            sql.append("brand_no=#{categoryNo},");
         }
         if(goods.getStore() != null){
-            sql.append(", store=#{store}");
+            sql.append("store=#{store},");
         }
+        sql.replace(sql.length() - 1,sql.length(),"");
         sql.append(" where goods_no=#{goodsNo}");
         return sql.toString();
     }

@@ -7,10 +7,10 @@ public class CategorySqlProvider {
     public String getInsertSql(@Param("parentNo") String parentNo){
         StringBuffer sql = new StringBuffer("insert into sed_market_category");
         if(parentNo != null) {
-            sql.append(" (category_no, name, parent_no, create_time, modify_time) values(#{categoryNo}, #{name}, #{parentNo}, #{createTime}, #{modifyTime})");
+            sql.append(" (category_no, name, parent_no) values(#{categoryNo}, #{name}, #{parentNo})");
             return sql.toString();
         }
-        sql.append(" (category_no, name, create_time, modify_time) values(#{categoryNo}, #{name}, #{createTime}, #{modifyTime})");
+        sql.append(" (category_no, name) values(#{categoryNo}, #{name})");
         return sql.toString();
     }
 }

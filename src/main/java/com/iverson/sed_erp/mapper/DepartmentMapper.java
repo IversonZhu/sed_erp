@@ -12,9 +12,7 @@ import java.util.List;
 public interface DepartmentMapper {
 
     @Insert("insert into sed_market_department (department_no,name,status) values (#{departmentNo},#{name},#{status})")
-    int addOne(@Param("departmentNo") String departmentNo,
-               @Param("name") String name,
-               @Param("status") int status);
+    int addOne(Department department);
 
     @UpdateProvider(type = DepartmentSqlProvider.class, method = "getUpdateSql")
     int update(Department department);

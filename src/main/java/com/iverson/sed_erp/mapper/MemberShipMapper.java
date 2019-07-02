@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 @Mapper
 public interface MemberShipMapper {
-    @Insert("insert into sed_market_membership_card values (#{id},#{cardNo},#{holder},#{phoneNumber},#{type},#{discount},#{createTime},#{modifyTime})")
+    @Insert("insert into sed_market_membership_card(card_no,holder,phone_number,type,discount) values (#{cardNo},#{holder},#{phoneNumber},#{type},#{discount})")
     int addOne(MemberShipCard memberShipCard);
 
     @UpdateProvider(type = MemberShipCardSqlProvider.class, method = "getUpdateSql")

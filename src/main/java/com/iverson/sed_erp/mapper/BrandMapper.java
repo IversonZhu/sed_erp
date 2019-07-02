@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface BrandMapper {
 
-    @Insert("insert into sed_market_brand values(#{id},#{brandNo},#{name},#{status},#{createTime},#{modifyTime})")
+    @Insert("insert into sed_market_brand(brand_no,name,status) values(#{brandNo},#{name},#{status})")
     int addOne(Brand brand);
 
     @SelectProvider(type = BrandSqlProvider.class, method = "getListSql")

@@ -11,19 +11,20 @@ public class MemberShipCardSqlProvider {
      * @return
      */
     public String getUpdateSql(MemberShipCard memberShipCard){
-        StringBuffer sql = new StringBuffer("update sed_market_membership_card set modify_time=#{modifyTime}");
+        StringBuffer sql = new StringBuffer("update sed_market_membership_card ");
         if(memberShipCard.getHolder() != null){
-            sql.append(", holder=#{holder}");
+            sql.append("holder=#{holder},");
         }
         if(memberShipCard.getPhoneNumber() != null){
-            sql.append(", phone_number=#{phoneNumber}");
+            sql.append("phone_number=#{phoneNumber},");
         }
         if(memberShipCard.getType() != null){
-            sql.append(", type=#{type}");
+            sql.append("type=#{type},");
         }
         if(memberShipCard.getDiscount() != null){
-            sql.append(", discount=#{discount}");
+            sql.append("discount=#{discount},");
         }
+        sql.replace(sql.length() - 1,sql.length(),"");
         sql.append(" where card_no=#{cardNo}");
         return sql.toString();
     }

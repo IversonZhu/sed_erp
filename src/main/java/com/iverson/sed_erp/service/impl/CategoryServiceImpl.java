@@ -8,6 +8,7 @@ import com.iverson.sed_erp.vo.CategoryVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,11 +39,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public int addOne(String name, String parentNo) {
         return categoryMapper.addOne(NoGenerateUtil.getCategoryNo(), name, parentNo, new Date(), new Date());
     }
 
     @Override
+    @Transactional
     public int updateCategoryByCategoryNo(String categoryNo, String name, String parentNo) {
         return categoryMapper.update(categoryNo, name, parentNo, new Date());
     }

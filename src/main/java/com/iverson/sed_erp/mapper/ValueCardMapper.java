@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 @Mapper
 public interface ValueCardMapper {
-    @Insert("insert into sed_market_value_card values (#{id},#{cardNo},#{holder},#{balance},#{phoneNumber},#{createTime},#{modifyTime})")
+    @Insert("insert into sed_market_value_card (card_no,holder,balance,phone_number) values (#{cardNo},#{holder},#{balance},#{phoneNumber})")
     int addOne(ValueCard valueCard);
 
     @UpdateProvider(type = ValueCardSqlProvider.class, method = "getUpdateSql")

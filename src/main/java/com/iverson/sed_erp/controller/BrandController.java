@@ -27,12 +27,15 @@ public class BrandController {
     public ResultVo create(@Valid @RequestBody BrandForm brandForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
             log.error("【创建品牌】参数不正确，brandForm = {}", brandForm);
-            throw new MarketException(ResultEnum.PARAM_ERROR);
+            return ResultVoUtil.error(ResultEnum.PARAM_ERROR.getCode(),ResultEnum.PARAM_ERROR.getMessage());
+            //throw new MarketException(ResultEnum.PARAM_ERROR);
         }
         int result = brandService.addBrand(brandForm);
         if(result == 1){
+            log.info("【创建品牌】成功，result = {}", result);
             return ResultVoUtil.success();
         }
+        log.error("【创建品牌】失败，result = {}", result);
         return ResultVoUtil.error(ResultEnum.INSERT_ERROR.getCode(),ResultEnum.INSERT_ERROR.getMessage());
     }
 
@@ -46,11 +49,13 @@ public class BrandController {
     }
 
     @PostMapping("/update")
-    public ResultVo update(@RequestBody BrandForm brandForm, BindingResult bindingResult){
+    public ResultVo update(@RequestBody BrandForm brandForm){
         int result = brandService.updateBrandByBrandNo(brandForm);
         if(result == 1){
+            log.info("【更新品牌】成功, result = {}", result);
             return ResultVoUtil.success();
         }
+        log.error("【更新品牌】失败, result = {}", result);
         return ResultVoUtil.error(ResultEnum.INSERT_ERROR.getCode(),ResultEnum.INSERT_ERROR.getMessage());
     }
 }

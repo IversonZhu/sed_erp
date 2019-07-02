@@ -11,26 +11,16 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 public class MemberShipCardForm {
-    /**
-     * 卡号
-     */
+    /** 卡号 */
     private String cardNo;
-    /**
-     * 持有者
-     */
+    /** 持有者 */
     @NotBlank(message = "持有者不能为空！")
     private String holder;
-    /**
-     * 手机号码
-     */
+    /** 手机号码 */
     @NotBlank(message = "手机号码不能为空")
     private String phoneNumber;
-    /**
-     * 类型（卡种）
-     */
+    /** 类型（卡种）*/
     private Integer type;
-    /**
-     * 折扣
-     */
+    /** 折扣 */
     private Integer discount;
 }

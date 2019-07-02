@@ -11,16 +11,17 @@ public class ValueCardSqlProvider {
      * @return
      */
     public String getUpdateSql(ValueCard valueCard){
-        StringBuffer sql = new StringBuffer("update sed_market_value_card set modify_time=#{modifyTime}");
+        StringBuffer sql = new StringBuffer("update sed_market_value_card set ");
         if(valueCard.getHolder() != null){
-            sql.append(", holder=#{holder}");
+            sql.append("holder=#{holder},");
         }
         if(valueCard.getBalance() != null){
-            sql.append(", balance=#{balance}");
+            sql.append("balance=#{balance},");
         }
         if(valueCard.getPhoneNumber() != null){
-            sql.append(", phone_number=#{phoneNumber}");
+            sql.append("phone_number=#{phoneNumber},");
         }
+        sql.replace(sql.length() - 1, sql.length(),"");
         sql.append(" where card_no=#{cardNo}");
         return sql.toString();
     }

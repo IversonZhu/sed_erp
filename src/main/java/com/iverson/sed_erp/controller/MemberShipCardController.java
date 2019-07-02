@@ -40,7 +40,7 @@ public class MemberShipCardController {
         }
     }
 
-    @GetMapping("/get")
+    @GetMapping("/list")
     public ResultVo getMemberShipCards(@RequestParam(name = "cardNo", required = false) String cardNo,
                                        @RequestParam(name = "holder", required = false) String holder,
                                        @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
