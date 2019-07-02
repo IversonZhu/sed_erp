@@ -57,9 +57,10 @@ public class StaffController {
                             @RequestParam(name = "sex") Integer sex,
                             @RequestParam(name = "birth") Date birth,
                             @RequestParam(name = "address") String address,
+                            @RequestParam(name = "departmentNo") String departmentNo,
                             @RequestParam(name = "pageNum") int pageNum,
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
-        PageInfo<StaffVo> staffVoPageInfo = staffService.getList(staffNo,name,phoneNumber,sex,birth,address,pageNum,pageSize);
+        PageInfo<StaffVo> staffVoPageInfo = staffService.getList(staffNo,name,phoneNumber,sex,birth,address,departmentNo,pageNum,pageSize);
         return ResultVoUtil.success(staffVoPageInfo);
     }
 
