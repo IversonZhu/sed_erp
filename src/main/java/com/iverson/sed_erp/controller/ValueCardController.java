@@ -36,6 +36,7 @@ public class ValueCardController {
         }
         int result = valueCardService.addOne(valueCardForm);
         if(result == 1){
+            log.info("【创建储值卡】插入成功，result = {}", result);
             return ResultVoUtil.success();
         }else{
             log.error("【创建储值卡】插入不成功，result = {}", result);
@@ -43,12 +44,12 @@ public class ValueCardController {
         }
     }
 
-    @GetMapping("/get")
+    @GetMapping("/list")
     @ResponseBody
     public ResultVo get(@RequestParam(name = "cardNo", required = false) String cardNo,
                         @RequestParam(name = "holder", required = false) String holder,
                         @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
-                        @RequestParam(name = "pageNum") int pageNum,
+                        @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                         @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<ValueCard> valueCardPageInfo = valueCardService.getCards(cardNo, holder, phoneNumber,pageNum, pageSize);
         return ResultVoUtil.success(valueCardPageInfo);
@@ -56,9 +57,10 @@ public class ValueCardController {
 
     @PostMapping("update")
     @ResponseBody
-    public ResultVo update(@RequestBody ValueCardForm valueCardForm, BindingResult bindingResult){
+    public ResultVo update(@RequestBody ValueCardForm valueCardForm){
         int result = valueCardService.updateValueCardByCardNo(valueCardForm);
         if(result == 1){
+            log.info("【创建储值卡】更新成功，result = {}", result);
             return ResultVoUtil.success();
         }else{
             log.error("【创建储值卡】更新不成功，result = {}", result);

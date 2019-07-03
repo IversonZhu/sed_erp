@@ -13,5 +13,5 @@ public class Brand {
     /** 品牌名称 */
     private String name;
     /** 状态 */
-    private int status;
+    private Integer status;
 }

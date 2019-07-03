@@ -2,6 +2,7 @@ package com.iverson.sed_erp.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.iverson.sed_erp.enums.BrandStatusEnum;
 import com.iverson.sed_erp.form.BrandForm;
 import com.iverson.sed_erp.mapper.BrandMapper;
 import com.iverson.sed_erp.pojo.Brand;
@@ -26,6 +27,7 @@ public class BrandServiceImpl implements BrandService {
         Brand brand = new Brand();
         brand.setBrandNo(NoGenerateUtil.getBrandNo());
         brand.setName(brandForm.getName());
+        brand.setStatus(BrandStatusEnum.NORMAL.getCode());
         return brandMapper.addOne(brand);
     }
 
@@ -43,6 +45,7 @@ public class BrandServiceImpl implements BrandService {
         Brand brand = new Brand();
         brand.setBrandNo(brandForm.getBrandNo());
         brand.setName(brandForm.getName());
+        brand.setStatus(brandForm.getStatus());
         return brandMapper.update(brand);
     }
 }

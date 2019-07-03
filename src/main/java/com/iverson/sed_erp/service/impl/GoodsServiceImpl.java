@@ -6,6 +6,7 @@ import com.iverson.sed_erp.form.GoodsForm;
 import com.iverson.sed_erp.mapper.GoodsMapper;
 import com.iverson.sed_erp.pojo.Goods;
 import com.iverson.sed_erp.service.GoodsService;
+import com.iverson.sed_erp.util.NoGenerateUtil;
 import com.iverson.sed_erp.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int addOne(GoodsForm goodsForm) {
         Goods goods = new Goods();
-        //goods.setGoodsNo(goodsForm.getGoodsNo());
+        goods.setGoodsNo(NoGenerateUtil.getGoodsNo());
         goods.setName(goodsForm.getName());
         goods.setBarcode(goodsForm.getBarcode());
         goods.setWeight(goodsForm.getWeight());
@@ -43,7 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setCategoryNo(goodsForm.getCategoryNo());
         goods.setBrandNo(goodsForm.getBrandNo());
         goods.setStore(goodsForm.getStore() == null ? 0 : goodsForm.getStore());
-        return goodsMapper.addOne(goods);
+        return goodsMapper.update(goods);
     }
 
     @Override

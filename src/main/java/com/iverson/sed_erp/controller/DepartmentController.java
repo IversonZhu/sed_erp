@@ -51,11 +51,11 @@ public class DepartmentController {
         return ResultVoUtil.error(ResultEnum.UPDATE_ERROR.getCode(),ResultEnum.UPDATE_ERROR.getMessage());
     }
 
-    @GetMapping("/getList")
+    @GetMapping("/list")
     public ResultVo getList(@RequestParam(name = "departmentNo", required = false) String departmentNo,
                             @RequestParam(name = "name",required = false) String name,
                             @RequestParam(name = "status", required = false) Integer status,
-                            @RequestParam(name = "pageNum") int pageNum,
+                            @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<Department> departmentPageInfo = departmentService.getList(departmentNo,name,status,pageNum,pageSize);
         return ResultVoUtil.success(departmentPageInfo);

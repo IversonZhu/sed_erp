@@ -50,12 +50,12 @@ public class GoodsController {
     }
 
     @GetMapping("/list")
-    public ResultVo getList(@RequestParam(name = "goodsNo") String goodsNo,
-                            @RequestParam(name = "name") String name,
-                            @RequestParam(name = "barcode") String barcode,
-                            @RequestParam(name = "categoryNo") String categoryNo,
-                            @RequestParam(name = "brandNo") String brandNo,
-                            @RequestParam(name = "pageNum") int pageNum,
+    public ResultVo getList(@RequestParam(name = "goodsNo",required = false) String goodsNo,
+                            @RequestParam(name = "name",required = false) String name,
+                            @RequestParam(name = "barcode",required = false) String barcode,
+                            @RequestParam(name = "categoryNo",required = false) String categoryNo,
+                            @RequestParam(name = "brandNo",required = false) String brandNo,
+                            @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<GoodsVo> goodsVoPageInfo = goodsService.getList(goodsNo,name,barcode,categoryNo,brandNo,pageNum,pageSize);
         return ResultVoUtil.success(goodsVoPageInfo);

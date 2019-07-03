@@ -22,10 +22,14 @@ public class BrandSqlProvider {
      * @return
      */
     public String getUpdateSql(Brand brand){
-        StringBuffer sql = new StringBuffer("update sed_market_brand set status=#{status} ");
+        StringBuffer sql = new StringBuffer("update sed_market_brand set ");
         if(brand.getName() != null){
-            sql.append(",name=#{name} ");
+            sql.append("name=#{name},");
         }
+        if(brand.getStatus() != null){
+            sql.append("status=#{status},");
+        }
+        sql.replace(sql.length() - 1,sql.length()," ");
         sql.append("where brand_no=#{brandNo}");
         return sql.toString();
     }

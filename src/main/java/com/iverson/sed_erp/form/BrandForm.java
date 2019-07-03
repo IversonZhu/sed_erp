@@ -12,4 +12,6 @@ public class BrandForm {
     /** 品牌名称 */
     @NotBlank(message = "品牌名称必填")
     private String name;
+    /** 状态 */
+    private Integer status;
 }

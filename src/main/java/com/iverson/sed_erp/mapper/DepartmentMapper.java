@@ -20,5 +20,5 @@ public interface DepartmentMapper {
     @SelectProvider(type = DepartmentSqlProvider.class, method = "getListSql")
     List<Department> getList(@Param("departmentNo") String departmentNo,
                              @Param("name") String name,
-                             @Param("status") int status);
+                             @Param("status") Integer status);
 }

@@ -51,14 +51,14 @@ public class StaffController {
     }
 
     @GetMapping("/list")
-    public ResultVo getList(@RequestParam(name = "staffNo") String staffNo,
-                            @RequestParam(name = "name") String name,
-                            @RequestParam(name = "phoneNumber") String phoneNumber,
-                            @RequestParam(name = "sex") Integer sex,
-                            @RequestParam(name = "birth") Date birth,
-                            @RequestParam(name = "address") String address,
-                            @RequestParam(name = "departmentNo") String departmentNo,
-                            @RequestParam(name = "pageNum") int pageNum,
+    public ResultVo getList(@RequestParam(name = "staffNo",required = false) String staffNo,
+                            @RequestParam(name = "name",required = false) String name,
+                            @RequestParam(name = "phoneNumber",required = false) String phoneNumber,
+                            @RequestParam(name = "sex",required = false) Integer sex,
+                            @RequestParam(name = "birth",required = false) Date birth,
+                            @RequestParam(name = "address",required = false) String address,
+                            @RequestParam(name = "departmentNo",required = false) String departmentNo,
+                            @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<StaffVo> staffVoPageInfo = staffService.getList(staffNo,name,phoneNumber,sex,birth,address,departmentNo,pageNum,pageSize);
         return ResultVoUtil.success(staffVoPageInfo);

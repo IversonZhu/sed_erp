@@ -33,6 +33,7 @@ public class MemberShipCardController {
         }
         int result = memberShipCardService.addOne(memberShipCardForm);
         if(result == 1){
+            log.info("【创建会员卡】插入成功, result = {}", result);
             return ResultVoUtil.success();
         }else{
             log.error("【创建会员卡】插入不成功，result = {}", result);
@@ -52,13 +53,10 @@ public class MemberShipCardController {
     }
 
     @PostMapping("/update")
-    public ResultVo update(@RequestBody MemberShipCardForm memberShipCardForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            log.error("【修改会员卡】参数不正确，valueCardForm = {}", memberShipCardForm);
-            new MarketException(ResultEnum.PARAM_ERROR);
-        }
+    public ResultVo update(@RequestBody MemberShipCardForm memberShipCardForm){
         int result = memberShipCardService.updateMemberShipCardByCardNo(memberShipCardForm);
         if(result == 1){
+            log.info("【修改会员卡】修改成功,result = {}", result);
             return ResultVoUtil.success();
         }else{
             log.error("【修改会员卡】修改不成功，result = {}", result);

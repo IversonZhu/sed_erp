@@ -11,7 +11,7 @@ public class MemberShipCardSqlProvider {
      * @return
      */
     public String getUpdateSql(MemberShipCard memberShipCard){
-        StringBuffer sql = new StringBuffer("update sed_market_membership_card ");
+        StringBuffer sql = new StringBuffer("update sed_market_membership_card set ");
         if(memberShipCard.getHolder() != null){
             sql.append("holder=#{holder},");
         }

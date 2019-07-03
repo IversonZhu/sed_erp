@@ -11,5 +11,5 @@ public class Department {
     /** 部门名称 */
     private String name;
     /** 状态 */
-    private int status;
+    private Integer status;
 }

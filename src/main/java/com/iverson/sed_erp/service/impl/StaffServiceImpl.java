@@ -6,6 +6,7 @@ import com.iverson.sed_erp.form.StaffForm;
 import com.iverson.sed_erp.mapper.StaffMapper;
 import com.iverson.sed_erp.pojo.Staff;
 import com.iverson.sed_erp.service.StaffService;
+import com.iverson.sed_erp.util.NoGenerateUtil;
 import com.iverson.sed_erp.vo.StaffVo;
 import org.hibernate.validator.constraints.EAN;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,14 @@ public class StaffServiceImpl implements StaffService {
     @Transactional
     public int addOne(StaffForm staffForm) {
         Staff staff = new Staff();
+        staff.setStaffNo(NoGenerateUtil.getStaffNo());
         staff.setName(staffForm.getName());
         staff.setPhoneNumber(staffForm.getPhoneNumber());
         staff.setAge(staffForm.getAge());
         staff.setSex(staffForm.getSex());
         staff.setBirth(staffForm.getBirth());
         staff.setAddress(staffForm.getAddress());
+        staff.setDepartmentNo(staffForm.getDepartmentNo());
         return staffMapper.addOne(staff);
     }
 
@@ -45,7 +48,8 @@ public class StaffServiceImpl implements StaffService {
         staff.setSex(staffForm.getSex());
         staff.setBirth(staffForm.getBirth());
         staff.setAddress(staffForm.getAddress());
-        return staffMapper.addOne(staff);
+        staff.setDepartmentNo(staffForm.getDepartmentNo());
+        return staffMapper.update(staff);
     }
 
     @Override

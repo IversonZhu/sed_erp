@@ -42,7 +42,7 @@ public class BrandController {
     @GetMapping("/list")
     public ResultVo list(@RequestParam(name = "brandNo", required = false) String brandNo,
                          @RequestParam(name = "name", required = false) String name,
-                         @RequestParam(name = "pageNum") int pageNum,
+                         @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                          @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<Brand> brandPageInfo = brandService.getBrands(brandNo, name, pageNum, pageSize);
         return ResultVoUtil.success(brandPageInfo);

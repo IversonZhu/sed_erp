@@ -45,7 +45,7 @@ public class StaffMapperTest {
 
     @Test
     public void getList() {
-        List<StaffVo> staffVos = staffMapper.getList(null,null,null,null,null,null,null,"DN20190702102837810737");
+        List<StaffVo> staffVos = staffMapper.getList(null,null,null,null,null,null,"DN20190702102837810737");
         Assert.assertNotNull(staffVos);
     }
 }

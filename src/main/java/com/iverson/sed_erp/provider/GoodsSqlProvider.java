@@ -31,8 +31,6 @@ public class GoodsSqlProvider {
     public String getListSql(@Param("goodsNo") String goodsNo,
                                @Param("name") String name,
                                @Param("barcode") String barcode,
-                               @Param("weight") String weight,
-                               @Param("price") String price,
                                @Param("categoryNo") String categoryNo,
                                @Param("brandNo") String brandNo){
         String str = "select g.goods_no,g.name,g.barcode,g.weight,g.price,b.name as brand_name,c.name as category_name,g.store " +
@@ -48,12 +46,6 @@ public class GoodsSqlProvider {
         }
         if(barcode != null){
             sql.append(" and g.barcode like CONCAT('%',#{barcode},'%')");
-        }
-        if(weight != null){
-            sql.append(" and g.weight like CONCAT('%',#{weight},'%')");
-        }
-        if(price != null){
-            sql.append(" and g.price like CONCAT('%',#{price},'%')");
         }
         if(categoryNo != null){
             sql.append(" and g.category_no like CONCAT('%',#{categoryNo},'%')");
