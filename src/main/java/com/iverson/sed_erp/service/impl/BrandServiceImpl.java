@@ -8,6 +8,7 @@ import com.iverson.sed_erp.mapper.BrandMapper;
 import com.iverson.sed_erp.pojo.Brand;
 import com.iverson.sed_erp.service.BrandService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
+import com.iverson.sed_erp.vo.BrandVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,5 +48,10 @@ public class BrandServiceImpl implements BrandService {
         brand.setName(brandForm.getName());
         brand.setStatus(brandForm.getStatus());
         return brandMapper.update(brand);
+    }
+
+    @Override
+    public List<BrandVo> getAll(Integer status) {
+        return brandMapper.getAll(status);
     }
 }

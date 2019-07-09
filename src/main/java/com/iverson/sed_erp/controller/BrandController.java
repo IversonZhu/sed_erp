@@ -7,6 +7,7 @@ import com.iverson.sed_erp.form.BrandForm;
 import com.iverson.sed_erp.pojo.Brand;
 import com.iverson.sed_erp.service.BrandService;
 import com.iverson.sed_erp.util.ResultVoUtil;
+import com.iverson.sed_erp.vo.BrandVo;
 import com.iverson.sed_erp.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/brand")
@@ -47,6 +49,12 @@ public class BrandController {
                          @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<Brand> brandPageInfo = brandService.getBrands(brandNo, name, status, pageNum, pageSize);
         return ResultVoUtil.success(brandPageInfo);
+    }
+
+    @GetMapping("/all")
+    public ResultVo all(@RequestParam(name = "status") Integer status){
+        List<BrandVo> brandVos = brandService.getAll(status);
+        return ResultVoUtil.success(brandVos);
     }
 
     @PostMapping("/update")
