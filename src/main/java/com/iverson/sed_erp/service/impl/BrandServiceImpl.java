@@ -32,9 +32,9 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public PageInfo<Brand> getBrands(String brandNo,String name, int pageNum, int pageSize) {
+    public PageInfo<Brand> getBrands(String brandNo,String name, Integer status, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<Brand> brands = brandMapper.getList(brandNo,name);
+        List<Brand> brands = brandMapper.getList(brandNo,name,status);
         PageInfo<Brand> brandPageInfo = new PageInfo<>(brands);
         return brandPageInfo;
     }

@@ -16,7 +16,8 @@ public interface BrandMapper {
 
     @SelectProvider(type = BrandSqlProvider.class, method = "getListSql")
     List<Brand> getList(@Param("brandNo") String brandNo,
-                          @Param("name") String name);
+                        @Param("name") String name,
+                        @Param("status") Integer status);
 
     @UpdateProvider(type = BrandSqlProvider.class, method = "getUpdateSql")
     int update(Brand brand);
