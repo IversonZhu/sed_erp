@@ -9,7 +9,9 @@ public class GoodsVo {
     private String barcode;
     private double weight;
     private double price;
+    private String categoryNo;
     private String categoryName;
+    private String brandNo;
     private String brandName;
     private String store;
 }

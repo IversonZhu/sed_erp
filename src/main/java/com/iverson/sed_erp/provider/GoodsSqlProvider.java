@@ -33,7 +33,7 @@ public class GoodsSqlProvider {
                                @Param("barcode") String barcode,
                                @Param("categoryNo") String categoryNo,
                                @Param("brandNo") String brandNo){
-        String str = "select g.goods_no,g.name,g.barcode,g.weight,g.price,b.name as brand_name,c.name as category_name,g.store " +
+        String str = "select g.goods_no,g.name,g.barcode,g.weight,g.price,g.brand_no,b.name as brand_name,g.category_no,c.name as category_name,g.store " +
                      "from (sed_market_goods g left join sed_market_category c on g.category_no = c.category_no) " +
                      "left join sed_market_brand b on g.brand_no = b.brand_no " +
                      "where 1=1 ";
