@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface DepartmentMapper {
 
-    @Insert("insert into sed_market_department (department_no,name,status) values (#{departmentNo},#{name},#{status})")
+    @Insert("insert into sed_market_department (department_no,name,status,parent_department_no) values (#{departmentNo},#{name},#{status},#{parentDepartmentNo})")
     int addOne(Department department);
 
     @UpdateProvider(type = DepartmentSqlProvider.class, method = "getUpdateSql")
@@ -20,5 +20,9 @@ public interface DepartmentMapper {
     @SelectProvider(type = DepartmentSqlProvider.class, method = "getListSql")
     List<Department> getList(@Param("departmentNo") String departmentNo,
                              @Param("name") String name,
+                             @Param("parentDepartmentNo") String parentDepartmentNo,
                              @Param("status") Integer status);
+
+    @Select("select * from sed_market_department")
+    List<Department> getAll();
 }

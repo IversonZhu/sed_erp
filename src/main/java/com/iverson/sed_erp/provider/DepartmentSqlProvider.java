@@ -13,7 +13,8 @@ public class DepartmentSqlProvider {
      */
     public String getListSql(@Param("departmentNo") String departmentNo,
                              @Param("name") String name,
-                             @Param("status") Integer status){
+                             @Param("status") Integer status,
+                             @Param("parentDepartmentNo") String parentDepartmentNo){
         StringBuffer sql = new StringBuffer("select * from sed_market_department where 1=1 ");
         if(departmentNo != null){
             sql.append("and department_no=#{departmentNo} ");
@@ -22,9 +23,11 @@ public class DepartmentSqlProvider {
             sql.append("and name=#{name} ");
         }
         if(status != null){
-            sql.append("and status=#{status}");
+            sql.append("and status=#{status} ");
         }
-
+        if(parentDepartmentNo != null){
+            sql.append("and parent_department_no=#{parentDepartmentNo}");
+        }
         return sql.toString();
     }
 
@@ -40,6 +43,9 @@ public class DepartmentSqlProvider {
         }
         if(department.getStatus() != null){
             sql.append("status=#{status},");
+        }
+        if(department.getParentDepartmentNo() != null){
+            sql.append("parent_department_no=#{parentDepartmentNo},");
         }
         sql.replace(sql.length() - 1,sql.length()," ");
         sql.append("where department_no=#{departmentNo}");

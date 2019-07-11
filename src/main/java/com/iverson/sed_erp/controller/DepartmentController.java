@@ -7,6 +7,7 @@ import com.iverson.sed_erp.form.DepartmentForm;
 import com.iverson.sed_erp.pojo.Department;
 import com.iverson.sed_erp.service.DepartmentService;
 import com.iverson.sed_erp.util.ResultVoUtil;
+import com.iverson.sed_erp.vo.DepartmentVo;
 import com.iverson.sed_erp.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/department")
@@ -55,9 +57,16 @@ public class DepartmentController {
     public ResultVo getList(@RequestParam(name = "departmentNo", required = false) String departmentNo,
                             @RequestParam(name = "name",required = false) String name,
                             @RequestParam(name = "status", required = false) Integer status,
+                            @RequestParam(name = "parentDepartmentNo", required = false) String parentDepartmentNo,
                             @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
-        PageInfo<Department> departmentPageInfo = departmentService.getList(departmentNo,name,status,pageNum,pageSize);
+        PageInfo<Department> departmentPageInfo = departmentService.getList(departmentNo,name,parentDepartmentNo,status,pageNum,pageSize);
         return ResultVoUtil.success(departmentPageInfo);
+    }
+
+    @GetMapping("/tree")
+    public ResultVo getDepartmentTree(){
+        List<DepartmentVo> departmentVos = departmentService.getDepartmentTree();
+        return ResultVoUtil.success(departmentVos);
     }
 }

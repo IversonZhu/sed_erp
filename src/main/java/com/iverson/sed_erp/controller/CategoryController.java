@@ -35,7 +35,7 @@ public class CategoryController {
     @GetMapping("/update")
     public ResultVo update(@RequestParam(name = "categoryNo") String categoryNo,
                            @RequestParam(name = "name") String name,
-                           @RequestParam(name = "parentNo", required = false) String parentNo){
+                           @RequestParam(name = "parentNo") String parentNo){
         int result = categoryService.updateCategoryByCategoryNo(categoryNo, name, parentNo);
         if(result == 1){
             return ResultVoUtil.success();
@@ -44,8 +44,8 @@ public class CategoryController {
     }
 
     @GetMapping("/getTree")
-    public ResultVo getCategoryTree(){
-        List<CategoryVo> categories = categoryService.getCategoryTree();
+    public ResultVo getCategoryTree(){List<CategoryVo> categories = categoryService.getCategoryTree();
         return ResultVoUtil.success(categories);
+
     }
 }

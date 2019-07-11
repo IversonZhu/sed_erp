@@ -11,5 +11,7 @@ public class DepartmentForm {
     @NotBlank(message = "部门名称必填")
     private String name;
 
+    private String parentDepartmentNo;
+
     private Integer status;
 }

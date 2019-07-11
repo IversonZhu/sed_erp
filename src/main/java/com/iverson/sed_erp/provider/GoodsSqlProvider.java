@@ -18,7 +18,7 @@ public class GoodsSqlProvider {
             sql.append("category_no=#{categoryNo},");
         }
         if(goods.getBrandNo() != null){
-            sql.append("brand_no=#{categoryNo},");
+            sql.append("brand_no=#{brandNo},");
         }
         if(goods.getStore() != null){
             sql.append("store=#{store},");
