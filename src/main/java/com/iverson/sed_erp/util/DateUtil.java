@@ -9,12 +9,16 @@ public class DateUtil {
     public static Date strToDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if(date == null)
-            return new Date();
+            return null;
         try {
             return sdf.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
-            return new Date();
+            return null;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(strToDate("2019-08-08"));
     }
 }

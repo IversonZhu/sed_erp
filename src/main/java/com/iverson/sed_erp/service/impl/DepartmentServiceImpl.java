@@ -1,15 +1,11 @@
 package com.iverson.sed_erp.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.iverson.sed_erp.enums.DepartmentStatusEnum;
 import com.iverson.sed_erp.form.DepartmentForm;
 import com.iverson.sed_erp.mapper.DepartmentMapper;
-import com.iverson.sed_erp.pojo.Category;
 import com.iverson.sed_erp.pojo.Department;
 import com.iverson.sed_erp.service.DepartmentService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
-import com.iverson.sed_erp.vo.CategoryVo;
 import com.iverson.sed_erp.vo.DepartmentVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,11 +64,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public PageInfo<Department> getList(String departmentNo, String name, String parentDepartmentNo, Integer status, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<Department> departments = departmentMapper.getList(departmentNo,name,parentDepartmentNo,status);
-        PageInfo<Department> departmentPageInfo = new PageInfo<>(departments);
-        return departmentPageInfo;
+    public List<Department> getList() {
+        List<Department> departments = departmentMapper.getAll();
+        return departments;
     }
 
     /**

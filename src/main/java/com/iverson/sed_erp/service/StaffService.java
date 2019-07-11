@@ -11,5 +11,5 @@ public interface StaffService {
 
     int update(StaffForm staffForm);
 
-    PageInfo<StaffVo> getList(String staffNo, String name, String phoneNumber, Integer sex, Date birth, String address,String departmentNo, int pageNum, int pageSize);
+    PageInfo<StaffVo> getList(String staffNo, String name, String phoneNumber, Integer sex, String birth,String departmentNo, int pageNum, int pageSize);
 }

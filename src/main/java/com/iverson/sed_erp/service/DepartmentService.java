@@ -1,6 +1,5 @@
 package com.iverson.sed_erp.service;
 
-import com.github.pagehelper.PageInfo;
 import com.iverson.sed_erp.form.DepartmentForm;
 import com.iverson.sed_erp.pojo.Department;
 import com.iverson.sed_erp.vo.DepartmentVo;
@@ -16,5 +15,5 @@ public interface DepartmentService {
 
     List<DepartmentVo> getDepartmentTree();
 
-    PageInfo<Department> getList(String departmentNo,String name, String parentDepartmentNo, Integer status,int pageNum, int pageSize);
+    List<Department> getList();
 }

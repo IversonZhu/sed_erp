@@ -17,7 +17,7 @@ public class StaffVo {
     /** 性别 */
     private Integer sex;
     /** 生日 */
-    private Date birth;
+    private String birth;
     /** 地址 */
     private String address;
     /** 部门编号 */

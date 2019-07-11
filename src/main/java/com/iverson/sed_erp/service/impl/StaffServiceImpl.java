@@ -53,9 +53,9 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public PageInfo<StaffVo> getList(String staffNo, String name, String phoneNumber, Integer sex, Date birth, String address,String departmentNo, int pageNum, int pageSize) {
+    public PageInfo<StaffVo> getList(String staffNo, String name, String phoneNumber, Integer sex, String birth, String departmentNo, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<StaffVo> staffVos = staffMapper.getList(staffNo,name,phoneNumber,sex,birth,address,departmentNo);
+        List<StaffVo> staffVos = staffMapper.getList(staffNo,name,phoneNumber,sex,birth,departmentNo);
         PageInfo<StaffVo> staffVoPageInfo = new PageInfo<>(staffVos);
         return staffVoPageInfo;
     }

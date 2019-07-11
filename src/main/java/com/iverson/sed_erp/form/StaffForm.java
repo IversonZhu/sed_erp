@@ -14,7 +14,7 @@ public class StaffForm {
     private String phoneNumber;
     private Integer age;
     private Integer sex;
-    private Date birth;
+    private String birth;
     private String address;
     private String departmentNo;
 }

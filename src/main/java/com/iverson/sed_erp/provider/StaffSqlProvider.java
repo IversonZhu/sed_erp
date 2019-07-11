@@ -39,8 +39,7 @@ public class StaffSqlProvider {
                              @Param("name") String name,
                              @Param("phoneNumber") String phoneNumber,
                              @Param("sex") Integer sex,
-                             @Param("birth") Date birth,
-                             @Param("address") String address,
+                             @Param("birth") String birth,
                              @Param("departmentNo") String departmentNo){
         String str = "select s.staff_no,s.name,s.phone_number,s.age,s.sex,s.birth,s.address,s.department_no,d.name as department_name from " +
                      "sed_market_staff s left join sed_market_department d on s.department_no = d.department_no where 1=1 ";
@@ -59,9 +58,6 @@ public class StaffSqlProvider {
         }
         if(birth != null){
             sql.append("and s.birth like CONCAT('%',#{birth},'%') ");
-        }
-        if(address != null){
-            sql.append("and s.address like CONCAT('%',#{address},'%') ");
         }
         if(departmentNo != null){
             sql.append("and s.department_no like CONCAT('%',#{departmentNo},'%')");

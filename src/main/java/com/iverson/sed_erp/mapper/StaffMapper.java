@@ -25,7 +25,6 @@ public interface StaffMapper {
                           @Param("name") String name,
                           @Param("phoneNumber") String phoneNumber,
                           @Param("sex") Integer sex,
-                          @Param("birth") Date birth,
-                          @Param("address") String address,
+                          @Param("birth") String birth,
                           @Param("departmentNo") String departmentNo);
 }
