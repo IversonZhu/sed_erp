@@ -1,6 +1,6 @@
 package com.iverson.sed_erp.test;
 
-import com.iverson.sed_erp.pojo.Goods;
+import com.iverson.erp.pojo.Goods;
 
 import java.text.ParseException;
 

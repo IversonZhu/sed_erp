@@ -1,8 +1,9 @@
 package com.iverson.sed_erp.mapper;
 
-import com.iverson.sed_erp.enums.DepartmentStatusEnum;
-import com.iverson.sed_erp.pojo.Department;
-import com.iverson.sed_erp.util.NoGenerateUtil;
+import com.iverson.erp.enums.DepartmentStatusEnum;
+import com.iverson.erp.mapper.DepartmentMapper;
+import com.iverson.erp.pojo.Department;
+import com.iverson.erp.util.NoGenerateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

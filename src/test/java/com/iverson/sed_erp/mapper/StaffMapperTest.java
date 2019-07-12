@@ -1,8 +1,9 @@
 package com.iverson.sed_erp.mapper;
 
-import com.iverson.sed_erp.enums.StaffSexEnum;
-import com.iverson.sed_erp.pojo.Staff;
-import com.iverson.sed_erp.util.NoGenerateUtil;
+import com.iverson.erp.enums.StaffSexEnum;
+import com.iverson.erp.mapper.StaffMapper;
+import com.iverson.erp.pojo.Staff;
+import com.iverson.erp.util.NoGenerateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
