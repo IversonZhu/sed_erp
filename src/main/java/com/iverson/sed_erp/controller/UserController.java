@@ -1,7 +1,7 @@
 package com.iverson.sed_erp.controller;
 
 import com.iverson.sed_erp.util.ResultVoUtil;
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.ResultVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @GetMapping("/login")
-    public ResultVo login(){
+    public ResultVO login(){
         return ResultVoUtil.success();
     }
 

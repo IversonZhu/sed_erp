@@ -3,8 +3,6 @@ package com.iverson.sed_erp.provider;
 import com.iverson.sed_erp.pojo.Staff;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
-
 public class StaffSqlProvider {
 
     public String getUpdateSql(Staff staff){

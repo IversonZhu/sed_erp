@@ -2,11 +2,10 @@ package com.iverson.sed_erp.mapper;
 
 import com.iverson.sed_erp.pojo.Staff;
 import com.iverson.sed_erp.provider.StaffSqlProvider;
-import com.iverson.sed_erp.vo.StaffVo;
+import com.iverson.sed_erp.vo.StaffVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -21,7 +20,7 @@ public interface StaffMapper {
     int update(Staff staff);
 
     @SelectProvider(type = StaffSqlProvider.class, method = "getListSql")
-    List<StaffVo> getList(@Param("staffNo") String staffNo,
+    List<StaffVO> getList(@Param("staffNo") String staffNo,
                           @Param("name") String name,
                           @Param("phoneNumber") String phoneNumber,
                           @Param("sex") Integer sex,

@@ -1,12 +1,12 @@
 package com.iverson.sed_erp.service;
 
-import com.iverson.sed_erp.vo.CategoryVo;
+import com.iverson.sed_erp.vo.CategoryVO;
 
 import java.util.List;
 
 public interface CategoryService {
 
-    List<CategoryVo> getCategoryTree();
+    List<CategoryVO> getCategoryTree();
 
     int addOne(String name, String parentNo);
 

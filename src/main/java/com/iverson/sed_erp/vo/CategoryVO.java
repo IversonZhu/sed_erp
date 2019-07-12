@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CategoryVo {
+public class CategoryVO {
     private String categoryNo;
     private String name;
     private String parentNo;
-    private List<CategoryVo> categorys;
+    private List<CategoryVO> categorys;
 }

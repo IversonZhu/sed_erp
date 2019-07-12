@@ -6,8 +6,8 @@ import com.iverson.sed_erp.exception.MarketException;
 import com.iverson.sed_erp.form.GoodsForm;
 import com.iverson.sed_erp.service.GoodsService;
 import com.iverson.sed_erp.util.ResultVoUtil;
-import com.iverson.sed_erp.vo.GoodsVo;
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.GoodsVO;
+import com.iverson.sed_erp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -24,7 +24,7 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @PostMapping("/create")
-    public ResultVo create(@Valid @RequestBody GoodsForm goodsForm, BindingResult bindingResult){
+    public ResultVO create(@Valid @RequestBody GoodsForm goodsForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("【创建商品】 参数不正确 goodsForm = {}",goodsForm);
             throw new MarketException(ResultEnum.PARAM_ERROR);
@@ -39,7 +39,7 @@ public class GoodsController {
     }
 
     @PostMapping("/update")
-    public ResultVo updateByNo(@RequestBody GoodsForm goodsForm){
+    public ResultVO updateByNo(@RequestBody GoodsForm goodsForm){
         int result = goodsService.update(goodsForm);
         if(result == 1){
             log.info("【创建商品】更新成功,result = {}", result);
@@ -50,14 +50,14 @@ public class GoodsController {
     }
 
     @GetMapping("/list")
-    public ResultVo getList(@RequestParam(name = "goodsNo",required = false) String goodsNo,
+    public ResultVO getList(@RequestParam(name = "goodsNo",required = false) String goodsNo,
                             @RequestParam(name = "name",required = false) String name,
                             @RequestParam(name = "barcode",required = false) String barcode,
                             @RequestParam(name = "categoryNo",required = false) String categoryNo,
                             @RequestParam(name = "brandNo",required = false) String brandNo,
                             @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
-        PageInfo<GoodsVo> goodsVoPageInfo = goodsService.getList(goodsNo,name,barcode,categoryNo,brandNo,pageNum,pageSize);
+        PageInfo<GoodsVO> goodsVoPageInfo = goodsService.getList(goodsNo,name,barcode,categoryNo,brandNo,pageNum,pageSize);
         return ResultVoUtil.success(goodsVoPageInfo);
     }
 }

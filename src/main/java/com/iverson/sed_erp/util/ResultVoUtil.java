@@ -1,6 +1,6 @@
 package com.iverson.sed_erp.util;
 
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.ResultVO;
 
 public class ResultVoUtil {
 
@@ -9,8 +9,8 @@ public class ResultVoUtil {
      * @param o
      * @return
      */
-    public static ResultVo success(Object o){
-        ResultVo resultVo = new ResultVo();
+    public static ResultVO success(Object o){
+        ResultVO resultVo = new ResultVO();
         resultVo.setCode(0);
         resultVo.setMsg("success");
         resultVo.setData(o);
@@ -21,7 +21,7 @@ public class ResultVoUtil {
      * 无数据返回(success)
      * @return
      */
-    public static ResultVo success(){
+    public static ResultVO success(){
         return success(null);
     }
 
@@ -31,8 +31,8 @@ public class ResultVoUtil {
      * @param msg
      * @return
      */
-    public static ResultVo error(Integer code, String msg){
-        ResultVo resultVo = new ResultVo();
+    public static ResultVO error(Integer code, String msg){
+        ResultVO resultVo = new ResultVO();
         resultVo.setCode(code);
         resultVo.setMsg(msg);
         return resultVo;

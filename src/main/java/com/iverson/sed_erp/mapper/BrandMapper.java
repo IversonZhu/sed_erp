@@ -2,7 +2,7 @@ package com.iverson.sed_erp.mapper;
 
 import com.iverson.sed_erp.pojo.Brand;
 import com.iverson.sed_erp.provider.BrandSqlProvider;
-import com.iverson.sed_erp.vo.BrandVo;
+import com.iverson.sed_erp.vo.BrandVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -24,5 +24,5 @@ public interface BrandMapper {
     int update(Brand brand);
 
     @Select("select brand_no, name from sed_market_brand where status=#{status}")
-    List<BrandVo> getAll(Integer status);
+    List<BrandVO> getAll(Integer status);
 }

@@ -3,8 +3,8 @@ package com.iverson.sed_erp.controller;
 import com.iverson.sed_erp.enums.ResultEnum;
 import com.iverson.sed_erp.service.CategoryService;
 import com.iverson.sed_erp.util.ResultVoUtil;
-import com.iverson.sed_erp.vo.CategoryVo;
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.CategoryVO;
+import com.iverson.sed_erp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +23,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/create")
-    public ResultVo create(@RequestParam(name = "name") String name,
+    public ResultVO create(@RequestParam(name = "name") String name,
                            @RequestParam(name = "parentNo", required = false) String parentNo){
         int result = categoryService.addOne(name, parentNo);
         if(result == 1){
@@ -33,7 +33,7 @@ public class CategoryController {
     }
 
     @GetMapping("/update")
-    public ResultVo update(@RequestParam(name = "categoryNo") String categoryNo,
+    public ResultVO update(@RequestParam(name = "categoryNo") String categoryNo,
                            @RequestParam(name = "name") String name,
                            @RequestParam(name = "parentNo") String parentNo){
         int result = categoryService.updateCategoryByCategoryNo(categoryNo, name, parentNo);
@@ -44,7 +44,7 @@ public class CategoryController {
     }
 
     @GetMapping("/getTree")
-    public ResultVo getCategoryTree(){List<CategoryVo> categories = categoryService.getCategoryTree();
+    public ResultVO getCategoryTree(){List<CategoryVO> categories = categoryService.getCategoryTree();
         return ResultVoUtil.success(categories);
 
     }

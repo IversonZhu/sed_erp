@@ -4,7 +4,7 @@ import com.iverson.sed_erp.mapper.CategoryMapper;
 import com.iverson.sed_erp.pojo.Category;
 import com.iverson.sed_erp.service.CategoryService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
-import com.iverson.sed_erp.vo.CategoryVo;
+import com.iverson.sed_erp.vo.CategoryVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,18 +21,18 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    public List<CategoryVo> getCategoryTree() {
+    public List<CategoryVO> getCategoryTree() {
         List<Category> allCategory = categoryMapper.getAll();
-        List<CategoryVo> rootCategory = new ArrayList<>();
+        List<CategoryVO> rootCategory = new ArrayList<>();
         for(Category category : allCategory){
-            CategoryVo categoryVo = new CategoryVo();
+            CategoryVO categoryVo = new CategoryVO();
             BeanUtils.copyProperties(category,categoryVo);
             if(categoryVo.getParentNo() == null){
                 rootCategory.add(categoryVo);
             }
         }
-        for(CategoryVo categoryVo : rootCategory){
-            List<CategoryVo> childList = getChild(categoryVo.getCategoryNo(), allCategory);
+        for(CategoryVO categoryVo : rootCategory){
+            List<CategoryVO> childList = getChild(categoryVo.getCategoryNo(), allCategory);
             categoryVo.setCategorys(childList);
         }
         return rootCategory;
@@ -56,21 +56,21 @@ public class CategoryServiceImpl implements CategoryService {
      * @param allCategory
      * @return
      */
-    private List<CategoryVo> getChild(String categoryNo, List<Category> allCategory) {
-        List<CategoryVo> childList = new ArrayList<>();
+    private List<CategoryVO> getChild(String categoryNo, List<Category> allCategory) {
+        List<CategoryVO> childList = new ArrayList<>();
         for(Category category : allCategory){
-            CategoryVo categoryVo = new CategoryVo();
+            CategoryVO categoryVo = new CategoryVO();
             BeanUtils.copyProperties(category,categoryVo);
             if(categoryVo.getParentNo() != null && categoryVo.getParentNo().equals(categoryNo)){
                 childList.add(categoryVo);
             }
         }
         //递归
-        for (CategoryVo categoryVo : childList) {
+        for (CategoryVO categoryVo : childList) {
             categoryVo.setCategorys(getChild(categoryVo.getCategoryNo(), allCategory));
         }
         if(childList.size() == 0){
-            return new ArrayList<CategoryVo>();
+            return new ArrayList<CategoryVO>();
         }
         return childList;
     }

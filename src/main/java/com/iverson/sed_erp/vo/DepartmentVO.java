@@ -5,10 +5,10 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class DepartmentVo {
+public class DepartmentVO {
     private String departmentNo;
     private String name;
     private Integer status;
     private String parentDepartmentNo;
-    private List<DepartmentVo> departments;
+    private List<DepartmentVO> departments;
 }

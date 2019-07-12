@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class StaffVo {
+public class StaffVO {
     /** 员工编号 */
     private String staffNo;
     /** 员工姓名 */

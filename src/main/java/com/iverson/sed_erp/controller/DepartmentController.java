@@ -5,8 +5,8 @@ import com.iverson.sed_erp.form.DepartmentForm;
 import com.iverson.sed_erp.pojo.Department;
 import com.iverson.sed_erp.service.DepartmentService;
 import com.iverson.sed_erp.util.ResultVoUtil;
-import com.iverson.sed_erp.vo.DepartmentVo;
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.DepartmentVO;
+import com.iverson.sed_erp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -24,7 +24,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @PostMapping("/create")
-    public ResultVo create(@Valid @RequestBody DepartmentForm departmentForm, BindingResult bindingResult){
+    public ResultVO create(@Valid @RequestBody DepartmentForm departmentForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
             log.error("【创建部门】参数不正确，departmentForm = {}", departmentForm);
             return ResultVoUtil.error(ResultEnum.PARAM_ERROR.getCode(),ResultEnum.PARAM_ERROR.getMessage());
@@ -40,7 +40,7 @@ public class DepartmentController {
     }
 
     @PostMapping("/update")
-    public ResultVo update(@RequestBody DepartmentForm departmentForm){
+    public ResultVO update(@RequestBody DepartmentForm departmentForm){
         int result = departmentService.updateByNo(departmentForm);
         if(result == 1){
             log.info("【更新部门】成功，result = {}", result);
@@ -51,14 +51,14 @@ public class DepartmentController {
     }
 
     @GetMapping("/list")
-    public ResultVo getList(){
+    public ResultVO getList(){
         List<Department> departments= departmentService.getList();
         return ResultVoUtil.success(departments);
     }
 
     @GetMapping("/tree")
-    public ResultVo getDepartmentTree(){
-        List<DepartmentVo> departmentVos = departmentService.getDepartmentTree();
+    public ResultVO getDepartmentTree(){
+        List<DepartmentVO> departmentVos = departmentService.getDepartmentTree();
         return ResultVoUtil.success(departmentVos);
     }
 }

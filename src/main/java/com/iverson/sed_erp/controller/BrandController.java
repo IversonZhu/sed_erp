@@ -2,13 +2,12 @@ package com.iverson.sed_erp.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.iverson.sed_erp.enums.ResultEnum;
-import com.iverson.sed_erp.exception.MarketException;
 import com.iverson.sed_erp.form.BrandForm;
 import com.iverson.sed_erp.pojo.Brand;
 import com.iverson.sed_erp.service.BrandService;
 import com.iverson.sed_erp.util.ResultVoUtil;
-import com.iverson.sed_erp.vo.BrandVo;
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.BrandVO;
+import com.iverson.sed_erp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -26,7 +25,7 @@ public class BrandController {
     private BrandService brandService;
 
     @PostMapping("/create")
-    public ResultVo create(@Valid @RequestBody BrandForm brandForm, BindingResult bindingResult){
+    public ResultVO create(@Valid @RequestBody BrandForm brandForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
             log.error("【创建品牌】参数不正确，brandForm = {}", brandForm);
             return ResultVoUtil.error(ResultEnum.PARAM_ERROR.getCode(),ResultEnum.PARAM_ERROR.getMessage());
@@ -42,7 +41,7 @@ public class BrandController {
     }
 
     @GetMapping("/list")
-    public ResultVo list(@RequestParam(name = "brandNo", required = false) String brandNo,
+    public ResultVO list(@RequestParam(name = "brandNo", required = false) String brandNo,
                          @RequestParam(name = "name", required = false) String name,
                          @RequestParam(name = "status", required = false) Integer status,
                          @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
@@ -52,13 +51,13 @@ public class BrandController {
     }
 
     @GetMapping("/all")
-    public ResultVo all(@RequestParam(name = "status") Integer status){
-        List<BrandVo> brandVos = brandService.getAll(status);
+    public ResultVO all(@RequestParam(name = "status") Integer status){
+        List<BrandVO> brandVos = brandService.getAll(status);
         return ResultVoUtil.success(brandVos);
     }
 
     @PostMapping("/update")
-    public ResultVo update(@RequestBody BrandForm brandForm){
+    public ResultVO update(@RequestBody BrandForm brandForm){
         int result = brandService.updateBrandByBrandNo(brandForm);
         if(result == 1){
             log.info("【更新品牌】成功, result = {}", result);

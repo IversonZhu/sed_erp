@@ -6,7 +6,7 @@ import com.iverson.sed_erp.mapper.DepartmentMapper;
 import com.iverson.sed_erp.pojo.Department;
 import com.iverson.sed_erp.service.DepartmentService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
-import com.iverson.sed_erp.vo.DepartmentVo;
+import com.iverson.sed_erp.vo.DepartmentVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,18 +46,18 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentVo> getDepartmentTree(){
+    public List<DepartmentVO> getDepartmentTree(){
         List<Department> allDepartment = departmentMapper.getAll();
-        List<DepartmentVo> rootDepartmentVo = new ArrayList<>();
+        List<DepartmentVO> rootDepartmentVo = new ArrayList<>();
         for(Department department : allDepartment) {
-            DepartmentVo departmentVo = new DepartmentVo();
+            DepartmentVO departmentVo = new DepartmentVO();
             BeanUtils.copyProperties(department, departmentVo);
             if (department.getParentDepartmentNo() == null) {
                 rootDepartmentVo.add(departmentVo);
             }
         }
-        for(DepartmentVo departmentVo : rootDepartmentVo){
-            List<DepartmentVo> childList = getChild(departmentVo.getDepartmentNo(), allDepartment);
+        for(DepartmentVO departmentVo : rootDepartmentVo){
+            List<DepartmentVO> childList = getChild(departmentVo.getDepartmentNo(), allDepartment);
             departmentVo.setDepartments(childList);
         }
         return rootDepartmentVo;
@@ -75,21 +75,21 @@ public class DepartmentServiceImpl implements DepartmentService {
      * @param allDepartment
      * @return
      */
-    private List<DepartmentVo> getChild(String departmentNo, List<Department> allDepartment) {
-        List<DepartmentVo> childList = new ArrayList<>();
+    private List<DepartmentVO> getChild(String departmentNo, List<Department> allDepartment) {
+        List<DepartmentVO> childList = new ArrayList<>();
         for(Department department : allDepartment){
-            DepartmentVo departmentVo = new DepartmentVo();
+            DepartmentVO departmentVo = new DepartmentVO();
             BeanUtils.copyProperties(department,departmentVo);
             if(departmentVo.getParentDepartmentNo() != null && departmentVo.getParentDepartmentNo().equals(departmentNo)){
                 childList.add(departmentVo);
             }
         }
         //递归
-        for (DepartmentVo departmentVo : childList) {
+        for (DepartmentVO departmentVo : childList) {
             departmentVo.setDepartments(getChild(departmentVo.getDepartmentNo(), allDepartment));
         }
         if(childList.size() == 0){
-            return new ArrayList<DepartmentVo>();
+            return new ArrayList<DepartmentVO>();
         }
         return childList;
     }

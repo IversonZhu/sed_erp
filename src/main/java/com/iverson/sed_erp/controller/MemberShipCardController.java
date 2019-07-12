@@ -7,7 +7,7 @@ import com.iverson.sed_erp.form.MemberShipCardForm;
 import com.iverson.sed_erp.pojo.MemberShipCard;
 import com.iverson.sed_erp.service.MemberShipCardService;
 import com.iverson.sed_erp.util.ResultVoUtil;
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -26,7 +26,7 @@ public class MemberShipCardController {
     private MemberShipCardService memberShipCardService;
 
     @PostMapping("/create")
-    public ResultVo create(@Valid @RequestBody MemberShipCardForm memberShipCardForm, BindingResult bindingResult){
+    public ResultVO create(@Valid @RequestBody MemberShipCardForm memberShipCardForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("【创建会员卡】参数不正确，valueCardForm = {}", memberShipCardForm);
             new MarketException(ResultEnum.PARAM_ERROR);
@@ -42,7 +42,7 @@ public class MemberShipCardController {
     }
 
     @GetMapping("/list")
-    public ResultVo getMemberShipCards(@RequestParam(name = "cardNo", required = false) String cardNo,
+    public ResultVO getMemberShipCards(@RequestParam(name = "cardNo", required = false) String cardNo,
                                        @RequestParam(name = "holder", required = false) String holder,
                                        @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
                                        @RequestParam(name = "type", required = false) Integer type,
@@ -53,7 +53,7 @@ public class MemberShipCardController {
     }
 
     @PostMapping("/update")
-    public ResultVo update(@RequestBody MemberShipCardForm memberShipCardForm){
+    public ResultVO update(@RequestBody MemberShipCardForm memberShipCardForm){
         int result = memberShipCardService.updateMemberShipCardByCardNo(memberShipCardForm);
         if(result == 1){
             log.info("【修改会员卡】修改成功,result = {}", result);

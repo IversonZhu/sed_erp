@@ -7,13 +7,11 @@ import com.iverson.sed_erp.mapper.StaffMapper;
 import com.iverson.sed_erp.pojo.Staff;
 import com.iverson.sed_erp.service.StaffService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
-import com.iverson.sed_erp.vo.StaffVo;
-import org.hibernate.validator.constraints.EAN;
+import com.iverson.sed_erp.vo.StaffVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -53,10 +51,10 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public PageInfo<StaffVo> getList(String staffNo, String name, String phoneNumber, Integer sex, String birth, String departmentNo, int pageNum, int pageSize) {
+    public PageInfo<StaffVO> getList(String staffNo, String name, String phoneNumber, Integer sex, String birth, String departmentNo, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<StaffVo> staffVos = staffMapper.getList(staffNo,name,phoneNumber,sex,birth,departmentNo);
-        PageInfo<StaffVo> staffVoPageInfo = new PageInfo<>(staffVos);
+        List<StaffVO> staffVos = staffMapper.getList(staffNo,name,phoneNumber,sex,birth,departmentNo);
+        PageInfo<StaffVO> staffVoPageInfo = new PageInfo<>(staffVos);
         return staffVoPageInfo;
     }
 }

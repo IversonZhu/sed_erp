@@ -7,7 +7,7 @@ import com.iverson.sed_erp.form.ValueCardForm;
 import com.iverson.sed_erp.pojo.ValueCard;
 import com.iverson.sed_erp.service.ValueCardService;
 import com.iverson.sed_erp.util.ResultVoUtil;
-import com.iverson.sed_erp.vo.ResultVo;
+import com.iverson.sed_erp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class ValueCardController {
 
     @PostMapping("/create")
     @ResponseBody
-    public ResultVo create(@Valid @RequestBody ValueCardForm valueCardForm, BindingResult bindingResult){
+    public ResultVO create(@Valid @RequestBody ValueCardForm valueCardForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("【创建储值卡】参数不正确，valueCardForm = {}", valueCardForm);
             new MarketException(ResultEnum.PARAM_ERROR);
@@ -46,7 +46,7 @@ public class ValueCardController {
 
     @GetMapping("/list")
     @ResponseBody
-    public ResultVo get(@RequestParam(name = "cardNo", required = false) String cardNo,
+    public ResultVO get(@RequestParam(name = "cardNo", required = false) String cardNo,
                         @RequestParam(name = "holder", required = false) String holder,
                         @RequestParam(name = "phoneNumber", required = false) String phoneNumber,
                         @RequestParam(name = "pageNum",defaultValue = "1") int pageNum,
@@ -57,7 +57,7 @@ public class ValueCardController {
 
     @PostMapping("update")
     @ResponseBody
-    public ResultVo update(@RequestBody ValueCardForm valueCardForm){
+    public ResultVO update(@RequestBody ValueCardForm valueCardForm){
         int result = valueCardService.updateValueCardByCardNo(valueCardForm);
         if(result == 1){
             log.info("【创建储值卡】更新成功，result = {}", result);

@@ -3,7 +3,7 @@ package com.iverson.sed_erp.vo;
 import lombok.Data;
 
 @Data
-public class ResultVo<T> {
+public class ResultVO<T> {
 
     /** 状态码 */
     private Integer code;

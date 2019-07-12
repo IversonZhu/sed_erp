@@ -2,8 +2,6 @@ package com.iverson.sed_erp.pojo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class Goods {
     /** id */

@@ -8,12 +8,11 @@ import com.iverson.sed_erp.mapper.BrandMapper;
 import com.iverson.sed_erp.pojo.Brand;
 import com.iverson.sed_erp.service.BrandService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
-import com.iverson.sed_erp.vo.BrandVo;
+import com.iverson.sed_erp.vo.BrandVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,7 +50,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<BrandVo> getAll(Integer status) {
+    public List<BrandVO> getAll(Integer status) {
         return brandMapper.getAll(status);
     }
 }

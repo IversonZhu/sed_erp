@@ -7,7 +7,7 @@ import com.iverson.sed_erp.mapper.GoodsMapper;
 import com.iverson.sed_erp.pojo.Goods;
 import com.iverson.sed_erp.service.GoodsService;
 import com.iverson.sed_erp.util.NoGenerateUtil;
-import com.iverson.sed_erp.vo.GoodsVo;
+import com.iverson.sed_erp.vo.GoodsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,10 +48,10 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public PageInfo<GoodsVo> getList(String goodsNo, String name, String barcode, String categoryNo, String brandNo, int pageNum, int pageSize) {
+    public PageInfo<GoodsVO> getList(String goodsNo, String name, String barcode, String categoryNo, String brandNo, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<GoodsVo> goodsVos = goodsMapper.getList(goodsNo,name,barcode,categoryNo,brandNo);
-        PageInfo<GoodsVo> goodsVoPageInfo = new PageInfo<>(goodsVos);
+        List<GoodsVO> goodsVos = goodsMapper.getList(goodsNo,name,barcode,categoryNo,brandNo);
+        PageInfo<GoodsVO> goodsVoPageInfo = new PageInfo<>(goodsVos);
         return goodsVoPageInfo;
     }
 }
