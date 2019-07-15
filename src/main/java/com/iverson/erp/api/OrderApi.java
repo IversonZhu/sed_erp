@@ -1,4 +1,4 @@
-package com.iverson.erp.controller;
+package com.iverson.erp.api;
 
 import com.iverson.erp.util.ResultVoUtil;
 import com.iverson.erp.vo.ResultVO;
@@ -7,23 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 用户
+ * Description:
+ *
  * @author Iverson
- * @date 2019/07/13
+ * @version 1.00
+ * @date 2019/7/15
  */
-
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/api/order")
+public class OrderApi {
 
-    @GetMapping("/login")
-    public ResultVO login(){
+    @GetMapping("test")
+    public ResultVO test(){
+        System.out.println("test");
         return ResultVoUtil.success();
     }
-
-    @GetMapping("/loginOut")
-    public ResultVO loginOut(){
-        return ResultVoUtil.success();
-    }
-
 }
