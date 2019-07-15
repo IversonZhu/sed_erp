@@ -1,5 +1,6 @@
 package com.iverson.erp.api;
 
+import com.iverson.erp.dto.CartDTO;
 import com.iverson.erp.service.GoodsService;
 import com.iverson.erp.util.ResultVoUtil;
 import com.iverson.erp.vo.GoodsVO;
@@ -28,7 +29,8 @@ public class GoodsApi {
     private GoodsService goodsService;
 
     @GetMapping("/get")
-    public ResultVO getGoods(@RequestParam(name = "barcode") String barcode){
+    public ResultVO getCart(@RequestParam(name = "barcode") String barcode){
+        CartDTO cartDTO = new CartDTO();
         if(StringUtils.isEmpty(barcode)) {
             log.info("【二维码查找商品】 barcode = {}" , barcode);
             return ResultVoUtil.error(000,"");
