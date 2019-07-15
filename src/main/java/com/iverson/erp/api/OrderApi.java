@@ -19,7 +19,6 @@ public class OrderApi {
 
     @GetMapping("test")
     public ResultVO test(){
-        System.out.println("test");
         return ResultVoUtil.success();
     }
 }

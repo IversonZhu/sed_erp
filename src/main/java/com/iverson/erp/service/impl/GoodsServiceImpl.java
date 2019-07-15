@@ -54,4 +54,9 @@ public class GoodsServiceImpl implements GoodsService {
         PageInfo<GoodsVO> goodsVoPageInfo = new PageInfo<>(goodsVos);
         return goodsVoPageInfo;
     }
+
+    @Override
+    public GoodsVO getGoodsByBarcode(String barcode) {
+        return goodsMapper.getGoodsByBarcode(barcode);
+    }
 }

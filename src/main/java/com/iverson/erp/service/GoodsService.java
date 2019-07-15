@@ -10,4 +10,6 @@ public interface GoodsService {
     int update(GoodsForm goodsForm);
 
     PageInfo<GoodsVO> getList(String goodsNo, String name, String barcode, String categoryNo, String brandNo, int pageNum, int pageSize);
+
+    GoodsVO getGoodsByBarcode(String barcode);
 }

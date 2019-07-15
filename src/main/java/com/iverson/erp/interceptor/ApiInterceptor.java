@@ -34,7 +34,7 @@ public class ApiInterceptor implements HandlerInterceptor {
         log.info("token={}", tokenNo);
         Shop shop = shopService.getShopByToken(tokenNo);
         if(shop != null) {
-            log.info("【api拦截器验证】 result=#{}" ,"success");
+            log.info("【api拦截器验证】 result = {}" ,"success");
             return true;
         }
         response.sendRedirect("noToken");
