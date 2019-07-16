@@ -1,8 +1,11 @@
 package com.iverson.sed_erp.test;
 
+import com.iverson.erp.dto.CartDTO;
 import com.iverson.erp.pojo.Goods;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Test {
 
@@ -18,34 +21,17 @@ public class Test {
 //        Date birth = sdf.parse("1993-10-01");
 //        System.out.println(birth.toString());
 
-        Goods goods = new Goods();
-        goods.setName("小明");
-        goods.setPrice(100.00);
-
-        StringBuffer sql = new StringBuffer("update sed_market_goods set ");
-        if(goods.getName() != null){
-            sql.append("name=#{name},");
+        CartDTO cartDTO = new CartDTO();
+        cartDTO.setBarcode("123");
+        cartDTO.setName("小明");
+        cartDTO.setQuantity(111);
+        cartDTO.setPrice(12.00);
+        List<CartDTO> cartDTOS = new ArrayList<>();
+        cartDTOS.add(cartDTO);
+        if(cartDTO.getBarcode() .equals("123") ){
+            cartDTO.setBarcode("456");
+            cartDTOS.add(cartDTO);
         }
-        if(goods.getBarcode() != null){
-            sql.append("barcode=#{barcode},");
-        }
-        if(goods.getWeight() != null){
-            sql.append("weight=#{weight},");
-        }
-        if(goods.getPrice() != null){
-            sql.append("price=#{price},");
-        }
-        if(goods.getCategoryNo() != null){
-            sql.append("category_no=#{categoryNo},");
-        }
-        if(goods.getBrandNo() != null){
-            sql.append("brand_no=#{categoryNo},");
-        }
-        if(goods.getStore() != null){
-            sql.append("store=#{store},");
-        }
-        sql.replace(sql.length() - 1,sql.length(),"");
-        sql.append(" where goods_no=#{goodsNo}");
-        System.out.println(sql);
+        System.out.println(cartDTOS.toString());
     }
 }

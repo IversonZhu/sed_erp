@@ -85,8 +85,28 @@ public class NoGenerateUtil {
         return sb.toString();
     }
 
+    public static String getOrderNo() {
+        StringBuffer sb = new StringBuffer();
+        Random random = new Random();
+        Integer number = random.nextInt(900000) + 100000;
+        sb.append("ON");
+        sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
+        sb.append(String.valueOf(number));
+        return sb.toString();
+    }
+
+    public static String getOrderDetailNO() {
+        StringBuffer sb = new StringBuffer();
+        Random random = new Random();
+        Integer number = random.nextInt(900000) + 100000;
+        sb.append("ODN");
+        sb.append(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));
+        sb.append(String.valueOf(number));
+        return sb.toString();
+    }
 
     public static void main(String[] args) {
         System.out.println(getGoodsNo());
     }
+
 }

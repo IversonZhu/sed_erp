@@ -61,4 +61,7 @@ public interface GoodsMapper {
             "(sed_market_goods g left join sed_market_category c on g.category_no = c.category_no) " +
             "left join sed_market_brand b on g.brand_no = b.brand_no where g.barcode = #{barcode}")
     GoodsVO getGoodsByBarcode(String barcode);
+
+    @Select("select * from sed_market where goods_no=#{goodsNo}")
+    Goods getGoodsByNo(String goodsNo);
 }

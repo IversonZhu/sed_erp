@@ -3,19 +3,30 @@ package com.iverson.erp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.iverson.erp.converter.OrderMaster2OrderDtoConverter;
+import com.iverson.erp.dto.CartDTO;
 import com.iverson.erp.dto.OrderDTO;
+import com.iverson.erp.enums.OrderStatusEnum;
+import com.iverson.erp.enums.PayStatusEnum;
 import com.iverson.erp.enums.ResultEnum;
 import com.iverson.erp.exception.MarketException;
+import com.iverson.erp.mapper.GoodsMapper;
 import com.iverson.erp.mapper.OrderDetailMapper;
 import com.iverson.erp.mapper.OrderMasterMapper;
+import com.iverson.erp.pojo.Goods;
 import com.iverson.erp.pojo.OrderDetail;
 import com.iverson.erp.pojo.OrderMaster;
+import com.iverson.erp.service.GoodsService;
 import com.iverson.erp.service.OrderService;
+import com.iverson.erp.util.NoGenerateUtil;
+import com.iverson.erp.vo.GoodsVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +36,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderMasterMapper orderMasterMapper;
     @Autowired
     private OrderDetailMapper orderDetailMapper;
+    @Autowired
+    private GoodsService goodsService;
 
     @Override
     public OrderDTO findOne(String orderNo) {
@@ -46,8 +59,52 @@ public class OrderServiceImpl implements OrderService {
     public PageInfo<OrderDTO> getList(String orderNo, String machineNo, Integer orderStatus, Integer payStatus,int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<OrderMaster> orderMasters = orderMasterMapper.getList(orderNo,machineNo,orderStatus,payStatus);
-        List<OrderDTO> orderDtos = OrderMaster2OrderDtoConverter.convert(orderMasters);
+        List<OrderDTO> orderDtos = new ArrayList<>();
+        for (OrderMaster orderMaster : orderMasters){
+            List<OrderDetail> orderDetails = orderDetailMapper.getListByOrderNo(orderMaster.getOrderNo());
+            OrderDTO orderDTO = OrderMaster2OrderDtoConverter.convert(orderMaster,orderDetails);
+            //BeanUtils.copyProperties(orderMaster,orderDTO);
+            //orderDTO.setOrderDetails(orderDetails);
+            orderDtos.add(orderDTO);
+        }
         PageInfo<OrderDTO> orderDtoPageInfo = new PageInfo<>(orderDtos);
         return orderDtoPageInfo;
+    }
+
+    @Override
+    @Transactional
+    public OrderDTO createOrder(List<CartDTO> cartDTOS, String machineNo) {
+        String orderNo = NoGenerateUtil.getOrderNo();
+        double orderAmount = 0;
+        for(CartDTO cartDTO : cartDTOS){
+            GoodsVO goodsVO = goodsService.getGoodsByBarcode(cartDTO.getBarcode());
+            if(goodsVO == null){
+                throw new MarketException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            //计算总价
+            orderAmount += goodsVO.getPrice() * cartDTO.getQuantity();
+
+            //订单详情写入
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrderDetailNo(NoGenerateUtil.getOrderDetailNO());
+            orderDetail.setOrderNo(orderNo);
+            orderDetail.setGoodsBarcode(goodsVO.getBarcode());
+            orderDetail.setGoodsName(goodsVO.getName());
+            orderDetail.setGoodsNo(goodsVO.getGoodsNo());
+            orderDetail.setGoodsPrice(goodsVO.getPrice());
+            orderDetail.setGoodsWeight(goodsVO.getWeight());
+            orderDetail.setGoodsQuantity(cartDTO.getQuantity());
+            orderDetailMapper.addOne(orderDetail);
+
+            //订单写入
+            OrderMaster orderMaster = new OrderMaster();
+            orderMaster.setOrderNo(orderNo);
+            orderMaster.setOrderAmount(orderAmount);
+            orderMaster.setMachineNo(machineNo);
+            orderMaster.setOrderStatus(OrderStatusEnum.NEW_ORDER.getCode());
+            orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
+            orderMasterMapper.addOne(orderMaster);
+        }
+        return null;
     }
 }

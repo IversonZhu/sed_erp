@@ -8,7 +8,9 @@ public enum  ResultEnum {
     ORDER_NOT_EXIST(12, "订单不存在"),
     ORDERDETAIL_NOT_EXIST(13, "订单详情不存在"),
     INSERT_ERROR(400,"插入失败"),
-    UPDATE_ERROR(401,"更新失败");
+    UPDATE_ERROR(401,"更新失败"),
+    CART_EMPTY(18, "购物车为空"),
+    PRODUCT_NOT_EXIST(10, "商品不存在");
 
     private Integer code;
     private String message;

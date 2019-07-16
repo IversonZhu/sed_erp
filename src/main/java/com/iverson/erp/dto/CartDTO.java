@@ -2,21 +2,27 @@ package com.iverson.erp.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 购物车
  * @author Iverson
  * @date 2019/07/13
  */
 @Data
-public class CartDTO {
+public class CartDTO implements Serializable {
     /** 商品条码 */
-    private String goodsBarcode;
+    private String barcode;
     /** 商品名称 */
-    private String goodsName;
+    private String name;
     /** 商品价格 */
-    private Double goodsPrice;
+    private double price;
     /** 商品重量 */
-    private Double goodsWeight;
+    private double weight;
     /** 商品数量 */
-    private Integer goodsQuantity;
+    private int quantity;
+    /** 总价格 */
+    private double totalPrice;
+    /** 总重量 */
+    private double totalWeight;
 }
