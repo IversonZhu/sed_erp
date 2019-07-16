@@ -63,8 +63,6 @@ public class OrderServiceImpl implements OrderService {
         for (OrderMaster orderMaster : orderMasters){
             List<OrderDetail> orderDetails = orderDetailMapper.getListByOrderNo(orderMaster.getOrderNo());
             OrderDTO orderDTO = OrderMaster2OrderDtoConverter.convert(orderMaster,orderDetails);
-            //BeanUtils.copyProperties(orderMaster,orderDTO);
-            //orderDTO.setOrderDetails(orderDetails);
             orderDtos.add(orderDTO);
         }
         PageInfo<OrderDTO> orderDtoPageInfo = new PageInfo<>(orderDtos);
@@ -74,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDTO createOrder(List<CartDTO> cartDTOS, String machineNo) {
+        List<OrderDetail> orderDetails = new ArrayList<>();
         String orderNo = NoGenerateUtil.getOrderNo();
         double orderAmount = 0;
         for(CartDTO cartDTO : cartDTOS){
@@ -94,17 +93,22 @@ public class OrderServiceImpl implements OrderService {
             orderDetail.setGoodsPrice(goodsVO.getPrice());
             orderDetail.setGoodsWeight(goodsVO.getWeight());
             orderDetail.setGoodsQuantity(cartDTO.getQuantity());
+            orderDetails.add(orderDetail);
             orderDetailMapper.addOne(orderDetail);
-
-            //订单写入
-            OrderMaster orderMaster = new OrderMaster();
-            orderMaster.setOrderNo(orderNo);
-            orderMaster.setOrderAmount(orderAmount);
-            orderMaster.setMachineNo(machineNo);
-            orderMaster.setOrderStatus(OrderStatusEnum.NEW_ORDER.getCode());
-            orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
-            orderMasterMapper.addOne(orderMaster);
         }
-        return null;
+        //订单写入
+        OrderMaster orderMaster = new OrderMaster();
+        orderMaster.setOrderNo(orderNo);
+        orderMaster.setOrderAmount(orderAmount);
+        orderMaster.setMachineNo(machineNo);
+        orderMaster.setOrderStatus(OrderStatusEnum.NEW_ORDER.getCode());
+        orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
+        orderMasterMapper.addOne(orderMaster);
+
+        //构建orderDTO
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderDetails(orderDetails);
+        BeanUtils.copyProperties(orderMaster,orderDTO);
+        return orderDTO;
     }
 }
