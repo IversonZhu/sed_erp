@@ -14,10 +14,10 @@ public class OrderMasterSqlProvider {
             sql.append(" and machine_no like like CONCAT('%',#{machineNo},'%')");
         }
         if(orderStatus != null){
-            sql.append( "and order_status=#{orderStatus}");
+            sql.append( " and order_status=#{orderStatus}");
         }
         if(payStatus != null){
-            sql.append( "and pay_status=#{payStatus}");
+            sql.append( " and pay_status=#{payStatus}");
         }
         return sql.toString();
     }
