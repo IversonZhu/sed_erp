@@ -8,6 +8,10 @@ public class OrderMaster {
     private int id;
     /** 订单编号 */
     private String orderNo;
+    /** 员工编号 */
+    private String staffNo;
+    /** 订单编号 */
+    private String shopNo;
     /** 机器编号 */
     private String machineNo;
     /** 订单总金额 */
