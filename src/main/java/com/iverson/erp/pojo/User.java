@@ -8,12 +8,12 @@ public class User {
     private int id;
     /** 用户编号 */
     private String userNo;
+    /** 角色编号 */
+    private String roleNo;
     /** 用户名 */
     private String userName;
-    /** 密码 */
-    private String password;
     /** 用户昵称 */
     private String nickName;
-    /** 可见模块 */
-    private String module;
+    /** 密码 */
+    private String password;
 }

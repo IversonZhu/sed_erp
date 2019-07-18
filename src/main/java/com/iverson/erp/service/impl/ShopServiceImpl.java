@@ -4,7 +4,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.iverson.erp.enums.ShopStatusEnum;
 import com.iverson.erp.mapper.ShopMapper;
+import com.iverson.erp.pojo.Machine;
 import com.iverson.erp.pojo.Shop;
+import com.iverson.erp.service.MachineService;
 import com.iverson.erp.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private ShopMapper shopMapper;
+    @Autowired
+    private MachineService machineService;
 
     @Override
     public int create(String shopName) {
@@ -34,6 +38,10 @@ public class ShopServiceImpl implements ShopService {
     public PageInfo<Shop> getList(String shopNo, String shopName, Integer status,int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<Shop> shops = shopMapper.getList(shopNo,shopName,status);
+        for(Shop shop : shops){
+            List<Machine> machines = machineService.getByShopNo(shop.getShopNo());
+
+        }
         PageInfo<Shop> shopPageInfo = new PageInfo<>(shops);
         return shopPageInfo;
     }

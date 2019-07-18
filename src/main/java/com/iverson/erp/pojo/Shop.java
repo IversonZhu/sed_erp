@@ -23,11 +23,9 @@ public class Shop {
     /** 商店地址 */
     private String shopAddress;
     /** 商店负责人 */
-    private String principal;
+    private String shopLeader;
     /** 负责人手机号码 */
     private String phoneNumber;
-    /** 鉴权token */
-    private String token;
     /** 状态 */
     private Integer status;
 
@@ -38,7 +36,6 @@ public class Shop {
     public Shop(String shopName){
         this.shopNo = NoGenerateUtil.getShopNo();
         this.shopName = shopName;
-        this.token = TokenUtil.getInstance().getToken();
         this.status = ShopStatusEnum.NORMAL.getCode();
     }
 }

@@ -17,6 +17,8 @@ public class Machine {
     private String machineNo;
     /** 商店编号 */
     private String shopNo;
+    /** 机器序列号 */
+    private String serialNumber;
     /** 机器名称 */
     private String machineName;
     /** 机器token */
