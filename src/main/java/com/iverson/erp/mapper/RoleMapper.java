@@ -29,6 +29,9 @@ public interface RoleMapper {
     List<Role> getList(@Param("roleNo") String roleNo,
                        @Param("roleName") String roleName);
 
+    @Select("select role_name from sed_market_role where role_no=#{roleNo}")
+    String getRoleNameByNo(String roleNo);
+
     class RoleSqlProvider {
 
         public String getUpdateSql(Role role){

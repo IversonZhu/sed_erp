@@ -1,10 +1,25 @@
 package com.iverson.erp.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.iverson.erp.form.LoginForm;
+import com.iverson.erp.form.UserForm;
+import com.iverson.erp.pojo.User;
+import com.iverson.erp.service.UserService;
+import com.iverson.erp.util.KeyUtil;
+import com.iverson.erp.util.RedisUtil;
 import com.iverson.erp.util.ResultVoUtil;
 import com.iverson.erp.vo.ResultVO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.iverson.erp.vo.UserVO;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户
@@ -14,16 +29,76 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
-    @GetMapping("/login")
-    public ResultVO login(){
-        return ResultVoUtil.success();
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RedisUtil redisUtil;
+
+    @PostMapping("/login")
+    public ResultVO login(@Valid @RequestBody LoginForm loginForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            log.error("【用户登录】参数不正确，loginForm = {}", loginForm);
+            return ResultVoUtil.error(000,"xxx");
+        }
+        UserVO userVO = userService.login(loginForm);
+        if (userVO == null){
+            log.error("【用户登录】失败   用户不存在");
+            return ResultVoUtil.error(000,"xxx");
+        }
+        String key = KeyUtil.getKey();
+        redisUtil.set(key,userVO,3600*24*7);//7天需要重新登录
+        Map<String, Object> loginMap = new HashMap<>();
+        loginMap.put(key,userVO);
+        return ResultVoUtil.success(loginMap);
     }
 
     @GetMapping("/loginOut")
-    public ResultVO loginOut(){
+    public ResultVO loginOut(HttpServletRequest request){
+        redisUtil.del(request.getHeader("token"));
         return ResultVoUtil.success();
     }
 
+    @PostMapping("/create")
+    public ResultVO create(@Valid @RequestBody UserForm userForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            log.error("【创建用户】参数不正确，userForm = {}", userForm);
+            return ResultVoUtil.error(000,"xxx");
+        }
+        int result = userService.add(userForm);
+        if(result == 1){
+            log.info("【创建用户】成功 result={}", result);
+            return ResultVoUtil.success();
+        }
+        log.error("【创建用户】失败 result={}", result);
+        return ResultVoUtil.error(000,"xxx");
+    }
+
+    @GetMapping("/list")
+    public ResultVO getList(@RequestParam(name = "userNo", required = false) String userNo,
+                            @RequestParam(name = "roleNo", required = false) String roleNo,
+                            @RequestParam(name = "userName", required = false) String userName,
+                            @RequestParam(name = "nickName", required = false) String nickName,
+                            @RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
+                            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        PageInfo<User> userPageInfo = userService.getList(userNo,roleNo,userName,nickName,pageNum,pageSize);
+        return ResultVoUtil.success(userPageInfo);
+    }
+
+    @PostMapping("/update")
+    public ResultVO update(@Valid @RequestBody UserForm userForm, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            log.error("【修改用户】参数不正确，userForm = {}", userForm);
+            return ResultVoUtil.error(000,"xxx");
+        }
+        int result = userService.update(userForm);
+        if(result == 1){
+            log.info("【修改用户】成功 result={}", result);
+            return ResultVoUtil.success();
+        }
+        log.error("【修改用户】失败 result={}", result);
+        return ResultVoUtil.error(000,"xxx");
+    }
 }

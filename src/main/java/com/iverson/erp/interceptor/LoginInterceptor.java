@@ -1,11 +1,16 @@
 package com.iverson.erp.interceptor;
 
+import com.iverson.erp.util.RedisUtil;
+import com.iverson.erp.vo.UserVO;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Description: 登录拦截器
@@ -17,16 +22,24 @@ import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
-    long start = System.currentTimeMillis();
+
+    @Autowired
+    private RedisUtil redisUtil;
+
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        start = System.currentTimeMillis();
-        return true;
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+        String tokenNo = request.getHeader("token");
+        UserVO userVO = (UserVO) redisUtil.get(tokenNo);
+        if(userVO != null){
+            return true;
+        }
+        response.sendRedirect("login");
+        return false;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
-        System.out.println("Interceptor cost= " + (System.currentTimeMillis() - start));
+
     }
 
     @Override
