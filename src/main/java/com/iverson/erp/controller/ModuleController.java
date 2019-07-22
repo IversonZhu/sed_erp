@@ -2,6 +2,7 @@ package com.iverson.erp.controller;
 
 import com.iverson.erp.form.ModuleForm;
 import com.iverson.erp.form.RoleForm;
+import com.iverson.erp.pojo.Module;
 import com.iverson.erp.service.ModuleService;
 import com.iverson.erp.util.ResultVoUtil;
 import com.iverson.erp.vo.ResultVO;
@@ -60,6 +61,7 @@ public class ModuleController {
 
     @GetMapping("/tree")
     public ResultVO tree(){
+        List<Module> modules = moduleService.getTree();
         return ResultVoUtil.success();
     }
 }

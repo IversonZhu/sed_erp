@@ -50,8 +50,8 @@ public class CategoryController {
     }
 
     @GetMapping("/getTree")
-    public ResultVO getCategoryTree(){List<CategoryVO> categories = categoryService.getCategoryTree();
+    public ResultVO getCategoryTree(){
+        List<CategoryVO> categories = categoryService.getCategoryTree();
         return ResultVoUtil.success(categories);
-
     }
 }

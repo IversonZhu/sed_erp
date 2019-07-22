@@ -1,6 +1,9 @@
 package com.iverson.erp.service;
 
 import com.iverson.erp.form.ModuleForm;
+import com.iverson.erp.pojo.Module;
+
+import java.util.List;
 
 /**
  * Description:
@@ -13,5 +16,7 @@ public interface ModuleService {
     int add(ModuleForm moduleForm);
 
     int update(ModuleForm moduleForm);
+
+    List<Module> getTree();
 
 }
