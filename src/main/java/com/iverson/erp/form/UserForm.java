@@ -3,6 +3,7 @@ package com.iverson.erp.form;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Description:
@@ -22,4 +23,6 @@ public class UserForm {
     private String nickName;
     @NotBlank(message = "密码不能为空")
     private String password;
+    @NotNull(message = "状态不能为空")
+    private Integer status;
 }

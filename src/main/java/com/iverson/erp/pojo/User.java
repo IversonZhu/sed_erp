@@ -16,4 +16,6 @@ public class User {
     private String nickName;
     /** 密码 */
     private String password;
+    /** 状态 */
+    private Integer status;
 }

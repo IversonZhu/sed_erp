@@ -1,5 +1,9 @@
 package com.iverson.erp.service;
 
+import com.github.pagehelper.PageInfo;
+import com.iverson.erp.form.RoleForm;
+import com.iverson.erp.pojo.Role;
+
 /**
  * Description:
  *
@@ -9,4 +13,10 @@ package com.iverson.erp.service;
  */
 public interface RoleService {
     String getRoleNameByNo(String roleNo);
+
+    int create(RoleForm roleForm);
+
+    int update(RoleForm roleForm);
+
+    PageInfo<Role> getList(String roleNo, String roleName, int pageNum, int pageSize);
 }

@@ -2,9 +2,7 @@ package com.iverson.erp.util;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
@@ -28,6 +26,6 @@ public class PasswordUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println(getPassword("zhy19930816"));
+        System.out.println(getPassword("123"));
     }
 }

@@ -2,6 +2,7 @@ package com.iverson.erp.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.iverson.erp.enums.UserStatusEnum;
 import com.iverson.erp.form.LoginForm;
 import com.iverson.erp.form.UserForm;
 import com.iverson.erp.mapper.UserMapper;
@@ -52,6 +53,7 @@ public class UserServiceImpl implements UserService {
         user.setUserName(userForm.getUserName());
         user.setNickName(userForm.getNickName());
         user.setRoleNo(userForm.getRoleNo());
+        user.setStatus(UserStatusEnum.NORMAL.getCode());
         user.setPassword(PasswordUtil.getPassword(userForm.getPassword()));
         return userMapper.add(user);
     }
@@ -68,10 +70,11 @@ public class UserServiceImpl implements UserService {
     public int update(UserForm userForm) {
         User user = new User();
         user.setUserNo(userForm.getUserNo());
+        user.setRoleNo(userForm.getRoleNo());
         user.setUserName(userForm.getUserName());
         user.setNickName(userForm.getNickName());
-        user.setRoleNo(userForm.getRoleNo());
         user.setPassword(PasswordUtil.getPassword(userForm.getPassword()));
+        user.setStatus(userForm.getStatus());
         return userMapper.update(user);
     }
 }

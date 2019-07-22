@@ -19,10 +19,10 @@ import java.util.List;
 @Component
 public interface UserMapper {
 
-    @Insert("insert into sed_market_user(user_no,role_no,user_name,nick_name,password) values(#{userNo},#{roleNo},#{userName},#{nickName},#{password})")
+    @Insert("insert into sed_market_user(user_no,role_no,user_name,nick_name,password,status) values(#{userNo},#{roleNo},#{userName},#{nickName},#{password},#{status})")
     int add(User user);
 
-    @Update("update sed_market_user set role_no=#{roleNo},user_name=#{userName},nick_name=#{nickName},password=#{password}")
+    @Update("update sed_market_user set role_no=#{roleNo},user_name=#{userName},nick_name=#{nickName},password=#{password},status=#{status} where user_no=#{userNo}")
     int update(User user);
 
     @Select("select * from sed_market_user where user_name=#{userName} and password=#{password} and status=0")
