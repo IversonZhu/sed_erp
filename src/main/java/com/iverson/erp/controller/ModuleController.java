@@ -5,6 +5,7 @@ import com.iverson.erp.form.RoleForm;
 import com.iverson.erp.pojo.Module;
 import com.iverson.erp.service.ModuleService;
 import com.iverson.erp.util.ResultVoUtil;
+import com.iverson.erp.vo.ModuleVO;
 import com.iverson.erp.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,7 @@ public class ModuleController {
 
     @GetMapping("/tree")
     public ResultVO tree(){
-        List<Module> modules = moduleService.getTree();
-        return ResultVoUtil.success();
+        List<ModuleVO> modules = moduleService.getTree();
+        return ResultVoUtil.success(modules);
     }
 }

@@ -6,6 +6,7 @@ import com.iverson.erp.enums.RoleStatusEnum;
 import com.iverson.erp.form.RoleForm;
 import com.iverson.erp.mapper.RoleMapper;
 import com.iverson.erp.pojo.Role;
+import com.iverson.erp.service.ModuleService;
 import com.iverson.erp.service.RoleService;
 import com.iverson.erp.util.NoGenerateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private ModuleService moduleService;
 
     @Override
     public String getRoleNameByNo(String roleNo) {

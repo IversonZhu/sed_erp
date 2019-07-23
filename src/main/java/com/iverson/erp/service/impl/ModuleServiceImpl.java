@@ -5,6 +5,7 @@ import com.iverson.erp.mapper.ModuleMapper;
 import com.iverson.erp.pojo.Module;
 import com.iverson.erp.service.ModuleService;
 import com.iverson.erp.util.NoGenerateUtil;
+import com.iverson.erp.vo.ModuleVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,20 +51,39 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     @Override
-    public List<Module> getTree() {
+    public List<ModuleVO> getTree() {
         List<Module> allModule = moduleMapper.getAll();
-        List<Module> rootModule = new ArrayList<>();
+        List<ModuleVO> rootModule = new ArrayList<>();
         for (Module module : allModule) {
-            Module temp = new Module();
-            BeanUtils.copyProperties(module,temp);
-            if (temp.getParentNo() == null) {
-                rootModule.add(module);
+            ModuleVO moduleVO = new ModuleVO();
+            BeanUtils.copyProperties(module,moduleVO);
+            if (moduleVO.getParentNo() == null) {
+                rootModule.add(moduleVO);
             }
         }
-//        for (Module module : rootModule) {
-//            List<Module> childList = getChild(module.getNo(),allModule);
-//            module.set
-//        }
+        for (ModuleVO moduleVO : rootModule) {
+            List<ModuleVO> childList = getChild(moduleVO.getNo(),allModule);
+            moduleVO.setModuleVOS(childList);
+        }
         return rootModule;
+    }
+
+    private List<ModuleVO> getChild(String no, List<Module> allModule) {
+        List<ModuleVO> childList = new ArrayList<>();
+        for (Module module : allModule) {
+            ModuleVO moduleVO = new ModuleVO();
+            BeanUtils.copyProperties(module,moduleVO);
+            if (moduleVO.getParentNo() != null && moduleVO.getParentNo().equals(no)) {
+                childList.add(moduleVO);
+            }
+        }
+        //递归
+        for (ModuleVO moduleVO : childList) {
+            moduleVO.setModuleVOS(getChild(moduleVO.getNo(),allModule));
+        }
+        if (childList.size() == 0) {
+            return new ArrayList<ModuleVO>();
+        }
+        return childList;
     }
 }

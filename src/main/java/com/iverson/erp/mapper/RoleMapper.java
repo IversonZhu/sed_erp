@@ -35,7 +35,7 @@ public interface RoleMapper {
     class RoleSqlProvider {
 
         public String getUpdateSql(Role role){
-            StringBuffer sql = new StringBuffer("update sed_market_role set status=#{status},");
+            StringBuffer sql = new StringBuffer("update sed_market_role set status=#{status},module=#{module}");
             if(!StringUtils.isEmpty(role.getRoleName())){
                 sql.append("role_name=#{roleName},");
             }

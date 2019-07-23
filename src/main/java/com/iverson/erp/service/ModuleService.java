@@ -2,6 +2,7 @@ package com.iverson.erp.service;
 
 import com.iverson.erp.form.ModuleForm;
 import com.iverson.erp.pojo.Module;
+import com.iverson.erp.vo.ModuleVO;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public interface ModuleService {
 
     int update(ModuleForm moduleForm);
 
-    List<Module> getTree();
+    List<ModuleVO> getTree();
 
 }
