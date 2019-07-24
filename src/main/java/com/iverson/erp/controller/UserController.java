@@ -48,8 +48,8 @@ public class UserController {
             return ResultVoUtil.error(111,"xxx");
         }
         String token = KeyUtil.getKey();
-        redisUtil.set(token,userVO,3600*24*7);//7天需要重新登录
         userVO.setToken(token);
+        redisUtil.set(token,userVO,3600*24*7);//7天需要重新登录
         return ResultVoUtil.success(userVO);
     }
 
