@@ -6,6 +6,7 @@ import com.iverson.erp.enums.UserStatusEnum;
 import com.iverson.erp.form.LoginForm;
 import com.iverson.erp.form.UserForm;
 import com.iverson.erp.mapper.UserMapper;
+import com.iverson.erp.pojo.Role;
 import com.iverson.erp.pojo.User;
 import com.iverson.erp.service.RoleService;
 import com.iverson.erp.service.UserService;
@@ -40,9 +41,10 @@ public class UserServiceImpl implements UserService {
         if(user == null) {
             return null;
         }
-        String roleName = roleService.getRoleNameByNo(user.getRoleNo());
+        Role role = roleService.getRoleNameByNo(user.getRoleNo());
         BeanUtils.copyProperties(user,userVO);
-        userVO.setRoleName(roleName);
+        userVO.setRoleName(role.getRoleName());
+        userVO.setModule(role.getModule());
         return userVO;
     }
 

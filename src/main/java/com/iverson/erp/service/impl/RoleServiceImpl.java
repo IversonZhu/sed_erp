@@ -26,11 +26,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
-    @Autowired
-    private ModuleService moduleService;
 
     @Override
-    public String getRoleNameByNo(String roleNo) {
+    public Role getRoleNameByNo(String roleNo) {
         return roleMapper.getRoleNameByNo(roleNo);
     }
 

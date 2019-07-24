@@ -2,6 +2,8 @@ package com.iverson.erp.form;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * Description:
  *
@@ -14,6 +16,7 @@ public class RoleForm {
     /** 角色编号 */
     private String roleNo;
     /** 角色名称 */
+    @NotBlank(message = "角色名称不能为空")
     private String roleName;
     /** 角色状态 */
     private Integer status;

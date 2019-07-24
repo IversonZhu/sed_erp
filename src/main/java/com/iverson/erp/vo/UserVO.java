@@ -11,10 +11,14 @@ import lombok.Data;
  */
 @Data
 public class UserVO {
+    /** 鉴权token */
+    private String token;
     /** 用户编号 */
     private String userNo;
     /** 昵称 */
     private String nickName;
     /** 角色名称 */
     private String roleName;
+    /** 可见模块 */
+    private String module;
 }

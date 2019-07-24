@@ -29,13 +29,13 @@ public interface RoleMapper {
     List<Role> getList(@Param("roleNo") String roleNo,
                        @Param("roleName") String roleName);
 
-    @Select("select role_name from sed_market_role where role_no=#{roleNo}")
-    String getRoleNameByNo(String roleNo);
+    @Select("select * from sed_market_role where role_no=#{roleNo}")
+    Role getRoleNameByNo(String roleNo);
 
     class RoleSqlProvider {
 
         public String getUpdateSql(Role role){
-            StringBuffer sql = new StringBuffer("update sed_market_role set status=#{status},module=#{module}");
+            StringBuffer sql = new StringBuffer("update sed_market_role set status=#{status},module=#{module},");
             if(!StringUtils.isEmpty(role.getRoleName())){
                 sql.append("role_name=#{roleName},");
             }

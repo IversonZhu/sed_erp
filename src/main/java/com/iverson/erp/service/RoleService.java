@@ -12,7 +12,7 @@ import com.iverson.erp.pojo.Role;
  * @date 2019/7/19
  */
 public interface RoleService {
-    String getRoleNameByNo(String roleNo);
+    Role getRoleNameByNo(String roleNo);
 
     int create(RoleForm roleForm);
 

@@ -40,18 +40,17 @@ public class UserController {
     public ResultVO login(@Valid @RequestBody LoginForm loginForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("【用户登录】参数不正确，loginForm = {}", loginForm);
-            return ResultVoUtil.error(000,"xxx");
+            return ResultVoUtil.error(111,"xxx");
         }
         UserVO userVO = userService.login(loginForm);
         if (userVO == null){
             log.error("【用户登录】失败   用户不存在");
-            return ResultVoUtil.error(000,"xxx");
+            return ResultVoUtil.error(111,"xxx");
         }
-        String key = KeyUtil.getKey();
-        redisUtil.set(key,userVO,3600*24*7);//7天需要重新登录
-        Map<String, Object> loginMap = new HashMap<>();
-        loginMap.put(key,userVO);
-        return ResultVoUtil.success(loginMap);
+        String token = KeyUtil.getKey();
+        redisUtil.set(token,userVO,3600*24*7);//7天需要重新登录
+        userVO.setToken(token);
+        return ResultVoUtil.success(userVO);
     }
 
     @GetMapping("/loginOut")
