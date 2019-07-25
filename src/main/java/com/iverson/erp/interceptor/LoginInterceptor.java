@@ -1,6 +1,8 @@
 package com.iverson.erp.interceptor;
 
+import com.alibaba.fastjson.JSONObject;
 import com.iverson.erp.util.RedisUtil;
+import com.iverson.erp.vo.ResultVO;
 import com.iverson.erp.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Description: 登录拦截器
@@ -32,7 +35,21 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(userVO != null){
             return true;
         }
-        response.sendRedirect("/erp/user/unLogin");
+        response.setContentType("application/json; charset=utf-8");
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(101);
+        resultVO.setMsg("token失效");
+        PrintWriter out = null;
+        try{
+            out = response.getWriter();
+            out.append(JSONObject.toJSON(resultVO).toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(out != null){
+                out.close();
+            }
+        }
         return false;
     }
 
