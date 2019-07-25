@@ -27,13 +27,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-//        String tokenNo = request.getHeader("token");
-//        UserVO userVO = (UserVO) redisUtil.get(tokenNo);
-//        if(userVO != null){
-//            return true;
-//        }
-//        response.sendRedirect("login");
-        return true;
+        String tokenNo = request.getHeader("token");
+        UserVO userVO = (UserVO) redisUtil.get(tokenNo);
+        if(userVO != null){
+            return true;
+        }
+        response.sendRedirect("/erp/user/unLogin");
+        return false;
     }
 
     @Override

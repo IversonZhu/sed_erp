@@ -1,6 +1,7 @@
 package com.iverson.erp.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.iverson.erp.enums.ResultEnum;
 import com.iverson.erp.form.LoginForm;
 import com.iverson.erp.form.UserForm;
 import com.iverson.erp.pojo.User;
@@ -51,6 +52,11 @@ public class UserController {
         userVO.setToken(token);
         redisUtil.set(token,userVO,3600*24*7);//7天需要重新登录
         return ResultVoUtil.success(userVO);
+    }
+
+    @GetMapping("/unLogin")
+    public ResultVO unLogin(){
+        return ResultVoUtil.error(ResultEnum.UNLOGIN.getCode(),ResultEnum.UNLOGIN.getMessage());
     }
 
     @GetMapping("/loginOut")

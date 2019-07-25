@@ -16,6 +16,6 @@ public class LoginInterceptionConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login","/api/**");
+                .excludePathPatterns("/user/login","/api/**","/user/unLogin");
     }
 }

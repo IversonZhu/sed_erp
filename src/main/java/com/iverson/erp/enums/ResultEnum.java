@@ -10,7 +10,8 @@ public enum  ResultEnum {
     INSERT_ERROR(400,"插入失败"),
     UPDATE_ERROR(401,"更新失败"),
     CART_EMPTY(18, "购物车为空"),
-    PRODUCT_NOT_EXIST(10, "商品不存在");
+    PRODUCT_NOT_EXIST(10, "商品不存在"),
+    UNLOGIN(101,"token失效");
 
     private Integer code;
     private String message;
