@@ -29,7 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     private RedisUtil redisUtil;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String tokenNo = request.getHeader("token");
         UserVO userVO = (UserVO) redisUtil.get(tokenNo);
         if(userVO != null){
@@ -38,7 +38,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         response.setContentType("application/json; charset=utf-8");
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(101);
-        resultVO.setMsg("token失效");
+        resultVO.setMsg("您暂未登录,请登录");
         PrintWriter out = null;
         try{
             out = response.getWriter();

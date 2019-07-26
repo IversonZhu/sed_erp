@@ -10,6 +10,7 @@ import com.iverson.erp.util.KeyUtil;
 import com.iverson.erp.util.RedisUtil;
 import com.iverson.erp.util.ResultVoUtil;
 import com.iverson.erp.vo.ResultVO;
+import com.iverson.erp.vo.UserMVO;
 import com.iverson.erp.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,11 +55,6 @@ public class UserController {
         return ResultVoUtil.success(userVO);
     }
 
-    @GetMapping("/unLogin")
-    public ResultVO unLogin(){
-        return ResultVoUtil.error(ResultEnum.UNLOGIN.getCode(),ResultEnum.UNLOGIN.getMessage());
-    }
-
     @GetMapping("/loginOut")
     public ResultVO loginOut(HttpServletRequest request){
         redisUtil.del(request.getHeader("token"));
@@ -82,13 +78,12 @@ public class UserController {
 
     @GetMapping("/list")
     public ResultVO getList(@RequestParam(name = "userNo", required = false) String userNo,
-                            @RequestParam(name = "roleNo", required = false) String roleNo,
-                            @RequestParam(name = "userName", required = false) String userName,
                             @RequestParam(name = "nickName", required = false) String nickName,
+                            @RequestParam(name = "status", required = false) Integer status,
                             @RequestParam(name = "pageNum", defaultValue = "1") int pageNum,
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
-        PageInfo<User> userPageInfo = userService.getList(userNo,roleNo,userName,nickName,pageNum,pageSize);
-        return ResultVoUtil.success(userPageInfo);
+        PageInfo<UserMVO> userMVOPageInfo = userService.getList(userNo,nickName,status,pageNum,pageSize);
+        return ResultVoUtil.success(userMVOPageInfo);
     }
 
     @PostMapping("/update")

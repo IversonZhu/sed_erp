@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.iverson.erp.form.RoleForm;
 import com.iverson.erp.pojo.Role;
 
+import java.util.List;
+
 /**
  * Description:
  *
@@ -19,4 +21,6 @@ public interface RoleService {
     int update(RoleForm roleForm);
 
     PageInfo<Role> getList(String roleNo, String roleName, int pageNum, int pageSize);
+
+    List<Role> getAll();
 }

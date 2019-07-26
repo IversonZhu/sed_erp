@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.iverson.erp.form.LoginForm;
 import com.iverson.erp.form.UserForm;
 import com.iverson.erp.pojo.User;
+import com.iverson.erp.vo.UserMVO;
 import com.iverson.erp.vo.UserVO;
 
 /**
@@ -18,7 +19,7 @@ public interface UserService {
 
     int add(UserForm userForm);
 
-    PageInfo<User> getList(String userNo, String roleNo, String userName, String nickName, int pageNum, int pageSize);
+    PageInfo<UserMVO> getList(String userNo, String nickName, Integer status, int pageNum, int pageSize);
 
     int update(UserForm userForm);
 }

@@ -12,11 +12,13 @@ import com.iverson.erp.service.RoleService;
 import com.iverson.erp.service.UserService;
 import com.iverson.erp.util.NoGenerateUtil;
 import com.iverson.erp.util.PasswordUtil;
+import com.iverson.erp.vo.UserMVO;
 import com.iverson.erp.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,10 +63,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<User> getList(String userNo, String roleNo, String userName, String nickName, int pageNum, int pageSize) {
+    public PageInfo<UserMVO> getList(String userNo, String nickName, Integer status, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<User> users = userMapper.getList(userNo,roleNo,userName,nickName);
-        PageInfo<User> userPageInfo = new PageInfo<>(users);
+        List<UserMVO> userMVOS = userMapper.getList(userNo,nickName,status);
+        PageInfo<UserMVO> userPageInfo = new PageInfo<>(userMVOS);
         return userPageInfo;
     }
 

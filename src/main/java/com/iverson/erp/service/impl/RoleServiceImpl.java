@@ -59,4 +59,9 @@ public class RoleServiceImpl implements RoleService {
         PageInfo<Role> rolePageInfo = new PageInfo<>(roles);
         return rolePageInfo;
     }
+
+    @Override
+    public List<Role> getAll() {
+        return roleMapper.getList(null,null);
+    }
 }

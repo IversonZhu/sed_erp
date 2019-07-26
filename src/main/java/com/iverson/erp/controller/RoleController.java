@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Description:
@@ -66,5 +67,11 @@ public class RoleController {
                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
         PageInfo<Role> rolePageInfo = roleService.getList(roleNo, roleName, pageNum, pageSize);
         return ResultVoUtil.success(rolePageInfo);
+    }
+
+    @GetMapping("/all")
+    public ResultVO getAll(){
+        List<Role> roles = roleService.getAll();
+        return ResultVoUtil.success(roles);
     }
 }
