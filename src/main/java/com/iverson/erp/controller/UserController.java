@@ -47,7 +47,7 @@ public class UserController {
         UserVO userVO = userService.login(loginForm);
         if (userVO == null){
             log.error("【用户登录】失败   用户不存在");
-            return ResultVoUtil.error(111,"xxx");
+            return ResultVoUtil.error(111,"用户不存在,请重新登录");
         }
         String token = KeyUtil.getKey();
         userVO.setToken(token);
