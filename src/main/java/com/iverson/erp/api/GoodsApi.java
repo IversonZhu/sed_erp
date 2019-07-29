@@ -3,6 +3,7 @@ package com.iverson.erp.api;
 import com.iverson.erp.dto.CartDTO;
 import com.iverson.erp.service.GoodsService;
 import com.iverson.erp.util.KeyUtil;
+import com.iverson.erp.util.LogUtil;
 import com.iverson.erp.util.RedisUtil;
 import com.iverson.erp.util.ResultVoUtil;
 import com.iverson.erp.vo.CartVO;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,8 @@ public class GoodsApi {
     private RedisUtil redisUtil;
 
     @GetMapping("/get")
-    public ResultVO getCart(@RequestParam(name = "barcode") String barcode,
+    public ResultVO getCart(HttpServletRequest request,
+                            @RequestParam(name = "barcode") String barcode,
                             @RequestParam(name = "key", required = false) String key){
         CartVO cartVO = new CartVO();
         if(StringUtils.isEmpty(barcode)) {
@@ -98,6 +101,7 @@ public class GoodsApi {
                 redisUtil.set(key,cartDTOS,EXPIRE_TIME);
             }
         }
+        request.setAttribute(LogUtil.LOG_RETURN,ResultVoUtil.success(cartVO));
         return ResultVoUtil.success(cartVO);
     }
 }

@@ -28,8 +28,8 @@ public class LogInterceptor implements HandlerInterceptor {
     @Autowired
     private LogService logService;
 
-    private static final String LOG_SEND_TIME = "_send_time";
-    private static final String LOG_INFO = "_log_info";
+    private static final String LOG_SEND_TIME = "_send_time_";
+    private static final String LOG_INFO = "_log_info_";
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -62,6 +62,5 @@ public class LogInterceptor implements HandlerInterceptor {
         logInfo.setReturnData(JSON.toJSONString(request.getAttribute(LogUtil.LOG_RETURN),SerializerFeature.DisableCircularReferenceDetect,SerializerFeature.WriteMapNullValue));
         logService.save(logInfo);
         log.info("写入成功");
-
     }
 }

@@ -1,10 +1,8 @@
 package com.iverson.erp.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.iverson.erp.enums.ResultEnum;
 import com.iverson.erp.form.LoginForm;
 import com.iverson.erp.form.UserForm;
-import com.iverson.erp.pojo.User;
 import com.iverson.erp.service.UserService;
 import com.iverson.erp.util.KeyUtil;
 import com.iverson.erp.util.RedisUtil;
@@ -19,9 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 用户
  * @author Iverson
