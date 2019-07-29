@@ -29,7 +29,7 @@ import java.util.Map;
  * @date 2019/7/15
  */
 @RestController
-@RequestMapping("/api/order")
+@RequestMapping("api/order")
 @Slf4j
 public class OrderApi {
 
