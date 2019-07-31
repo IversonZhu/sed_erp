@@ -40,7 +40,6 @@ public class ShopServiceImpl implements ShopService {
         List<Shop> shops = shopMapper.getList(shopNo,shopName,status);
         for(Shop shop : shops){
             List<Machine> machines = machineService.getByShopNo(shop.getShopNo());
-
         }
         PageInfo<Shop> shopPageInfo = new PageInfo<>(shops);
         return shopPageInfo;

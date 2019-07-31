@@ -1,6 +1,7 @@
 package com.iverson.erp.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.iverson.erp.enums.ResultEnum;
 import com.iverson.erp.pojo.Shop;
 import com.iverson.erp.service.ShopService;
 import com.iverson.erp.util.ResultVoUtil;
@@ -35,7 +36,7 @@ public class ShopController {
             return ResultVoUtil.success();
         }
         log.error("创建店铺】失败，result = {}", result);
-        return ResultVoUtil.error(000,"");
+        return ResultVoUtil.error(ResultEnum.INSERT_ERROR.getCode(),ResultEnum.INSERT_ERROR.getMessage());
     }
 
     @GetMapping("/list")
@@ -58,6 +59,6 @@ public class ShopController {
             return ResultVoUtil.success();
         }
         log.error("更新店铺】失败，result = {}", result);
-        return ResultVoUtil.error(000,"");
+        return ResultVoUtil.error(ResultEnum.UPDATE_ERROR.getCode(), ResultEnum.UPDATE_ERROR.getMessage());
     }
 }

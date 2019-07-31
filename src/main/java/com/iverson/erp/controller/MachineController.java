@@ -31,12 +31,16 @@ public class MachineController {
     @PostMapping("/create")
     public ResultVO create(@Valid @RequestBody MachineForm machineForm, BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
-            log.error("【创建部门】参数不正确，departmentForm = {}", machineForm);
+            log.error("【创建机器】参数不正确，machineForm = {}", machineForm);
             return ResultVoUtil.error(ResultEnum.PARAM_ERROR.getCode(),ResultEnum.PARAM_ERROR.getMessage());
-            //throw new MarketException(ResultEnum.PARAM_ERROR);
         }
         int result = machineService.create(machineForm);
-        return ResultVoUtil.success();
+        if(result == 1) {
+            log.info("【创建机器】插入成功 result={}", result);
+            return ResultVoUtil.success();
+        }
+        log.error("【创建机器】插入失败，result = {}", result);
+        return ResultVoUtil.error(ResultEnum.INSERT_ERROR.getCode(),ResultEnum.INSERT_ERROR.getMessage());
     }
 
     @GetMapping("/delete")
@@ -46,6 +50,11 @@ public class MachineController {
             return ResultVoUtil.error(ResultEnum.PARAM_ERROR.getCode(),ResultEnum.PARAM_ERROR.getMessage());
         }
         int result = machineService.delete(machineNo,shopNo);
-        return ResultVoUtil.success();
+        if(result == 1) {
+            log.info("【更新机器】更新成功 result={}", result);
+            return ResultVoUtil.success();
+        }
+        log.error("【更新机器】更新失败，result = {}", result);
+        return ResultVoUtil.error(ResultEnum.UPDATE_ERROR.getCode(),ResultEnum.UPDATE_ERROR.getMessage());
     }
 }

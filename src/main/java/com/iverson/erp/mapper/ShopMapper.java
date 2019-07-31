@@ -17,8 +17,6 @@ import java.util.List;
 @Component
 @Mapper
 public interface ShopMapper {
-
-
     @Insert("insert into sed_market_shop (shop_no,shop_name,token,status) values(#{shopNo},#{shopName},#{token},#{status})")
     int addOne(Shop shop);
 
