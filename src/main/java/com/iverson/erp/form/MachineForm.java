@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 public class MachineForm {
+    private String machineNo;
     /** 商店编号 */
     @NotBlank(message = "商店编号不能为空")
     private String shopNo;

@@ -45,5 +45,16 @@ public class MachineServiceImpl implements MachineService {
         return machineMapper.delete(machineNo,shopNo);
     }
 
+    @Override
+    public int update(MachineForm machineForm) {
+        Machine machine = new Machine();
+        machine.setMachineNo(machineForm.getMachineNo());
+        machine.setShopNo(machineForm.getShopNo());
+        machine.setSerialNumber(machineForm.getSerialNumber());
+        machine.setMachineName(machineForm.getMachineName());
+        machine.setMachineToken(TokenUtil.getInstance().getToken());
+        return machineMapper.update(machine);
+    }
+
 
 }

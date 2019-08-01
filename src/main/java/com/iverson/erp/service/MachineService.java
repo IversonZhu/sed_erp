@@ -19,4 +19,5 @@ public interface MachineService {
 
     int delete(String machineNo, String shopNo);
 
+    int update(MachineForm machineForm);
 }

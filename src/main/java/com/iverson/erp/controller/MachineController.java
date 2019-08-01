@@ -43,6 +43,21 @@ public class MachineController {
         return ResultVoUtil.error(ResultEnum.INSERT_ERROR.getCode(),ResultEnum.INSERT_ERROR.getMessage());
     }
 
+    @PostMapping("/update")
+    public ResultVO update(@Valid @RequestBody MachineForm machineForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            log.error("【更新机器】参数不正确，machineForm = {}", machineForm);
+            return ResultVoUtil.error(ResultEnum.PARAM_ERROR.getCode(),ResultEnum.PARAM_ERROR.getMessage());
+        }
+        int result = machineService.update(machineForm);
+        if(result == 1) {
+            log.info("【更新机器】更新成功 result={}", result);
+            return ResultVoUtil.success();
+        }
+        log.error("【更新机器】更新失败，result = {}", result);
+        return ResultVoUtil.error(ResultEnum.UPDATE_ERROR.getCode(),ResultEnum.UPDATE_ERROR.getMessage());
+    }
+
     @GetMapping("/delete")
     public ResultVO delete(@RequestParam(name = "machineNo") String machineNo,
                            @RequestParam(name = "shopNo") String shopNo){
