@@ -1,7 +1,9 @@
 package com.iverson.erp.service;
 
 import com.github.pagehelper.PageInfo;
+import com.iverson.erp.form.ShopForm;
 import com.iverson.erp.pojo.Shop;
+import com.iverson.erp.vo.ShopVO;
 
 /**
  * Description:
@@ -13,11 +15,11 @@ import com.iverson.erp.pojo.Shop;
 public interface ShopService {
 
 
-    int create(String shopName);
+    int create(ShopForm shopForm);
 
-    PageInfo<Shop> getList(String shopNo, String shopName, Integer status, int pageNum, int pageSize);
+    PageInfo<ShopVO> getList(String shopNo, String shopName, String shopLeader, Integer status, int pageNum, int pageSize);
 
-    int update(String shopNo, String shopName, Integer status);
+    int update(ShopForm shopForm);
 
     Shop getShopByToken(String tokenNo);
 }
