@@ -56,5 +56,10 @@ public class MachineServiceImpl implements MachineService {
         return machineMapper.update(machine);
     }
 
+    @Override
+    public List<Machine> getList(String shopNo) {
+        return machineMapper.getListByShopNo(shopNo);
+    }
+
 
 }

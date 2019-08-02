@@ -19,7 +19,7 @@ public class SystemLogInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        return false;
+        return true;
     }
 
     @Override

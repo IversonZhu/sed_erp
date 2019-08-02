@@ -48,8 +48,8 @@ public class ShopServiceImpl implements ShopService {
         PageHelper.startPage(pageNum,pageSize);
         List<Shop> shops = shopMapper.getList(shopNo,shopName,shopLeader,status);
         List<ShopVO> shopVOS = new ArrayList<>();
-        ShopVO shopVO = new ShopVO();
         for(Shop shop : shops){
+            ShopVO shopVO = new ShopVO();
             BeanUtils.copyProperties(shop,shopVO);
             List<Machine> machines = machineService.getByShopNo(shop.getShopNo());
             shopVO.setMachines(machines);
@@ -69,10 +69,5 @@ public class ShopServiceImpl implements ShopService {
         shop.setShopAddress(shopForm.getShopAddress());
         shop.setStatus(shopForm.getStatus());
         return shopMapper.update(shop);
-    }
-
-    @Override
-    public Shop getShopByToken(String tokenNo) {
-        return shopMapper.getShopByToken(tokenNo, ShopStatusEnum.NORMAL.getCode());
     }
 }

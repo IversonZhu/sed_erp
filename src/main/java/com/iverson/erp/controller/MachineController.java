@@ -2,6 +2,7 @@ package com.iverson.erp.controller;
 
 import com.iverson.erp.enums.ResultEnum;
 import com.iverson.erp.form.MachineForm;
+import com.iverson.erp.pojo.Machine;
 import com.iverson.erp.service.MachineService;
 import com.iverson.erp.util.ResultVoUtil;
 import com.iverson.erp.vo.ResultVO;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Description:
@@ -21,7 +23,7 @@ import javax.validation.Valid;
  * @date 2019/7/18
  */
 @RestController
-@RequestMapping("/shop/machine")
+@RequestMapping("/machine")
 @Slf4j
 public class MachineController {
 
@@ -71,5 +73,11 @@ public class MachineController {
         }
         log.error("【更新机器】更新失败，result = {}", result);
         return ResultVoUtil.error(ResultEnum.UPDATE_ERROR.getCode(),ResultEnum.UPDATE_ERROR.getMessage());
+    }
+
+    @GetMapping("/list")
+    public ResultVO list(@RequestParam(name = "shopNo") String shopNo){
+        List<Machine> machineList = machineService.getList(shopNo);
+        return ResultVoUtil.success(machineList);
     }
 }

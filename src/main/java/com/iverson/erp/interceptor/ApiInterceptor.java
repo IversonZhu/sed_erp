@@ -30,14 +30,14 @@ public class ApiInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        String tokenNo = request.getHeader("token");
-        log.info("token={}", tokenNo);
-        Shop shop = shopService.getShopByToken(tokenNo);
-        if(shop != null) {
-            log.info("【api拦截器验证】 result = {}" ,"success");
-            return true;
-        }
-        response.sendRedirect("noToken");
+//        String tokenNo = request.getHeader("token");
+//        log.info("token={}", tokenNo);
+//        Shop shop = shopService.getShopByToken(tokenNo);
+//        if(shop != null) {
+//            log.info("【api拦截器验证】 result = {}" ,"success");
+//            return true;
+//        }
+//        response.sendRedirect("noToken");
         return false;
     }
 

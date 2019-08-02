@@ -20,6 +20,4 @@ public interface ShopService {
     PageInfo<ShopVO> getList(String shopNo, String shopName, String shopLeader, Integer status, int pageNum, int pageSize);
 
     int update(ShopForm shopForm);
-
-    Shop getShopByToken(String tokenNo);
 }

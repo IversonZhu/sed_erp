@@ -22,7 +22,7 @@ import javax.validation.Valid;
  * @date 2019/7/15
  */
 @RestController
-@RequestMapping("/token")
+@RequestMapping("/shop")
 @Slf4j
 public class ShopController {
 
@@ -54,7 +54,7 @@ public class ShopController {
         return ResultVoUtil.success(shopVOPageInfo);
     }
 
-    @GetMapping("/update")
+    @PostMapping("/update")
     public ResultVO update(@Valid @RequestBody ShopForm shopForm, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             log.error("【更新商店】参数不正确，shopForm = {}", shopForm);

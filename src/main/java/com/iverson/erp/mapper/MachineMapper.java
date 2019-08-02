@@ -32,6 +32,9 @@ public interface MachineMapper {
     @UpdateProvider(type = MachineSqlProvider.class, method = "getUpdateSql")
     int update(Machine machine);
 
+    @Select("select * from sed_market_machine where shop_no=#{shopNo}")
+    List<Machine> getListByShopNo(String shopNo);
+
     class MachineSqlProvider{
         public String getUpdateSql(Machine machine){
             StringBuffer sql = new StringBuffer("update sed_market_machine set ");
