@@ -28,7 +28,7 @@ public interface ShopMapper {
     int deleteByNo(String shopNo);
 
     @SelectProvider(type = ShopSqlProvider.class, method = "getListSql")
-    List<Shop> getList(String shopNo,String shopName,String shopLeader,Integer status);
+    List<Shop> getList(@Param("shopNo") String shopNo, @Param("shopName") String shopName, @Param("shopLeader") String shopLeader, @Param("status")Integer status);
 
     class ShopSqlProvider {
         public String getUpdateSql(Shop shop) {
@@ -53,7 +53,7 @@ public interface ShopMapper {
             return sql.toString();
         }
 
-        public String getListSql(String shopNo,String shopName,String shopLeader,Integer status){
+        public String getListSql(@Param("shopNo") String shopNo, @Param("shopName") String shopName, @Param("shopLeader") String shopLeader, @Param("status")Integer status){
             StringBuffer sql = new StringBuffer("select * from sed_market_shop where 1=1 ");
             if(!StringUtils.isEmpty(shopNo)){
                 sql.append("and shop_no like CONCAT('%',#{shopNo},'%') ");
