@@ -61,5 +61,10 @@ public class MachineServiceImpl implements MachineService {
         return machineMapper.getListByShopNo(shopNo);
     }
 
+    @Override
+    public Machine getMachineByToken(String tokenNo) {
+        return machineMapper.getMachineByToken(tokenNo);
+    }
+
 
 }

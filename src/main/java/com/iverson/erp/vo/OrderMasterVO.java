@@ -1,20 +1,22 @@
-package com.iverson.erp.dto;
+package com.iverson.erp.vo;
 
-import com.iverson.erp.pojo.OrderDetail;
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * class orderDTO
+ * Description:
+ *
  * @author Iverson
- * @date 2019/07/13
+ * @version 1.00
+ * @date 2019/8/6
  */
-
 @Data
-public class OrderDTO {
+public class OrderMasterVO {
     /** 订单编号 */
     private String orderNo;
+    /** 员工编号 */
+    private String staffNo;
+    /** 员工姓名 */
+    private String name;
     /** 商店编号 */
     private String shopNo;
     /** 商店名称 */
@@ -23,16 +25,10 @@ public class OrderDTO {
     private String machineNo;
     /** 机器名称 */
     private String machineName;
-    /** 员工编号 */
-    private String staffNo;
-    /** 员工姓名 */
-    private String name;
-    /** 订单总金额 */
+    /** 订单总价 */
     private Double orderAmount;
     /** 订单状态 */
     private Integer orderStatus;
     /** 支付状态 */
     private Integer payStatus;
-    /** 订单详情 */
-    List<OrderDetail> orderDetails;
 }

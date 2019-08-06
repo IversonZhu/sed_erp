@@ -35,6 +35,9 @@ public interface MachineMapper {
     @Select("select * from sed_market_machine where shop_no=#{shopNo}")
     List<Machine> getListByShopNo(String shopNo);
 
+    @Select("select * from sed_market_machine where machine_token=#{machineToken}")
+    Machine getMachineByToken(@Param("machineToken") String machineToken);
+
     class MachineSqlProvider{
         public String getUpdateSql(Machine machine){
             StringBuffer sql = new StringBuffer("update sed_market_machine set ");

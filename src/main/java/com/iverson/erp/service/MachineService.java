@@ -23,4 +23,6 @@ public interface MachineService {
 
     List<Machine> getList(String shopNo);
 
+    Machine getMachineByToken(String tokenNo);
+
 }

@@ -1,6 +1,8 @@
 package com.iverson.erp.interceptor;
 
+import com.iverson.erp.pojo.Machine;
 import com.iverson.erp.pojo.Shop;
+import com.iverson.erp.service.MachineService;
 import com.iverson.erp.service.ShopService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +27,19 @@ import java.io.IOException;
 public class ApiInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private ShopService shopService;
+    private MachineService machineService;
 
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-//        String tokenNo = request.getHeader("token");
-//        log.info("token={}", tokenNo);
-//        Shop shop = shopService.getShopByToken(tokenNo);
-//        if(shop != null) {
-//            log.info("【api拦截器验证】 result = {}" ,"success");
-//            return true;
-//        }
-//        response.sendRedirect("noToken");
+        String tokenNo = request.getHeader("token");
+        log.info("token={}", tokenNo);
+        Machine machine = machineService.getMachineByToken(tokenNo);
+        if(machine != null) {
+            log.info("【api拦截器验证】 result = {}" ,"success");
+            return true;
+        }
+        response.sendRedirect("noToken");//应该返回一个结果出去
         return false;
     }
 

@@ -17,6 +17,7 @@ import com.iverson.erp.service.GoodsService;
 import com.iverson.erp.service.OrderService;
 import com.iverson.erp.util.NoGenerateUtil;
 import com.iverson.erp.vo.GoodsVO;
+import com.iverson.erp.vo.OrderMasterVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,11 +57,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public PageInfo<OrderDTO> getList(String orderNo, String machineNo, Integer orderStatus, Integer payStatus,int pageNum,int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<OrderMaster> orderMasters = orderMasterMapper.getList(orderNo,machineNo,orderStatus,payStatus);
+        List<OrderMasterVO> orderMasterVOS = orderMasterMapper.getList(orderNo,machineNo,orderStatus,payStatus);
         List<OrderDTO> orderDtos = new ArrayList<>();
-        for (OrderMaster orderMaster : orderMasters){
-            List<OrderDetail> orderDetails = orderDetailMapper.getListByOrderNo(orderMaster.getOrderNo());
-            OrderDTO orderDTO = OrderMaster2OrderDtoConverter.convert(orderMaster,orderDetails);
+        for (OrderMasterVO OrderMasterVO : orderMasterVOS){
+            List<OrderDetail> orderDetails = orderDetailMapper.getListByOrderNo(OrderMasterVO.getOrderNo());
+            OrderDTO orderDTO = OrderMaster2OrderDtoConverter.convert(OrderMasterVO,orderDetails);
             orderDtos.add(orderDTO);
         }
         PageInfo<OrderDTO> orderDtoPageInfo = new PageInfo<>(orderDtos);
